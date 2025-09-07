@@ -68,7 +68,7 @@
                       </a>
                     </li>
                     <li aria-expanded="false" class="py-2 py-xl-5 px-0 px-xl-4">
-                      <a class="nav-link p-0" href="product.html">
+                      <a class="nav-link p-0" href="<?php echo base_url('product'); ?>">
                         Products
                         <span class="caret"></span>
                       </a>
@@ -79,13 +79,13 @@
                   </a>
                   <ul class="navbar-nav hover-menu main-menu px-0 mx-xl-n4">
                     <li aria-expanded="false" class="py-2 py-xl-5 px-0 px-xl-4">
-                      <a class="nav-link p-0" href="about-us.html">
+                      <a class="nav-link p-0" href="<?php echo base_url('aboutus'); ?>">
                         About Us
                         <span class="caret"></span>
                       </a>
                     </li>
                     <li aria-expanded="false" class="py-2 py-xl-5 px-0 px-xl-4">
-                      <a class="nav-link p-0" href="blog.html">
+                      <a class="nav-link p-0" href="<?php echo base_url('blog'); ?>">
                         Blog
                         <span class="caret"></span>
                       </a>
