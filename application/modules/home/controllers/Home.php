@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
-* HODController
-*/
 class Home extends MX_Controller
 {
 	
@@ -27,13 +24,31 @@ class Home extends MX_Controller
 		$data['banner3'] 				= $this->General_model->get_ones("tb_banner", "banner_category = 'banner 3'");
 		$data['product'] 				= $this->General_model->get_limit("tb_product","product_id", "DESC", "3");
 		$data['product_fav'] 		= $this->General_model->get_limit_where("tb_product","product_favorite = 'yes'", "product_id", "DESC", "3");
+		$data['testimoni'] 				= $this->General_model->get_limit("tb_testimoni","testimoni_id", "DESC", "20");
 
-    $this->load->view('header', $data);
-    $this->load->view('beranda', $data);
-    $this->load->view('footer', $data);
+    $this->load->view('template/header', $data);
+    $this->load->view('page/beranda', $data);
+    $this->load->view('template/footer', $data);
 	}
 
-}
+	public function product()
+	{
+		$slug 									= $link = $this->uri->segment(1);
+		$get_header 						= $this->General_model->get_ones("tb_header", "slug = '$slug'");
 
-/* End of file HODController.php */
-/* Location: ./application/modules/hod/controller/HODController.php */
+		$data['slug'] 					= $slug;
+		$data['tittle'] 				= $get_header->header_tittle;
+		$data['description'] 		= $get_header->header_description;
+		$data['keywords'] 			= $get_header->header_keywords;
+		$data['product'] 				= $this->General_model->get("tb_product");
+
+		
+
+    $this->load->view('template/header', $data);
+    $this->load->view('page/product', $data);
+    $this->load->view('template/footer', $data);
+	}
+
+	
+
+}

@@ -566,6 +566,95 @@
       title="Back To Top"><i class="fal fa-arrow-up"></i></a>
   </div>
 
+  <div class="canvas-sidebar filter-canvas">
+      <div class="canvas-overlay">
+      </div>
+      <form class="h-100">
+        <div class="card border-0 pt-5 pb-8 pb-sm-13 h-100">
+          <div class="px-6 pl-sm-8 text-right">
+            <span class="canvas-close d-inline-block text-right fs-24 mb-1 ml-auto lh-1 text-primary"><i
+                        class="fal fa-times"></i></span>
+          </div>
+          <div class="card-header bg-transparent py-0 px-6 px-sm-8 border-bottom">
+            <h3 class="fs-30 mb-5">
+              Filter by
+            </h3>
+            <!-- <p class="fs-15 text-primary mb-3">12 Products in “ Shop All ”</p> -->
+          </div>
+          <div class="card-body px-6 px-sm-8 pt-7 overflow-y-auto">
+            <div class="card border-0 mb-7">
+              <div class="card-header bg-transparent border-0 p-0">
+                <h3 class="card-title fs-20 mb-0">
+                  Kategori
+                </h3>
+              </div>
+              <div class="card-body px-0 pt-4 pb-0">
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-1">
+                    <a href="#"
+                                   class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Booth</a>
+                  </li>
+                  <li class="mb-1">
+                    <a href="#"
+                                   class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Booth Portabel</a>
+                  </li>
+                  <li class="mb-1">
+                    <a href="#"
+                                   class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Gerobak Container</a>
+                  </li>
+                  <li class="mb-1">
+                    <a href="#"
+                                   class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Gerobak Dorong</a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+          <div class="card-footer border-0 bg-transparent pt-5 px-8">
+            <div class="row no-gutter mx-n2">
+              <div class="col-sm-6 px-2 mb-2 mb-sm-0">
+                <a href="#" class="btn btn-primary btn-block letter-spacing-05 text-uppercase">apply</a>
+              </div>
+              <div class="col-sm-6 px-2">
+                <a href="#" class="btn btn-outline-primary btn-block letter-spacing-05 text-uppercase">clear</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mfp-hide search-popup mfp-with-anim" id="search-popup">
+      <form>
+        <div class="input-group position-relative">
+          <div class="input-group-prepend d-none d-md-block">
+            <select class="selectpicker"
+                        name="category"
+                        id="region-01"
+                        data-style="btn-lg letter-spacing-0 border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 pl-0 shadow-none text-capitalize font-weight-normal">
+              <option value="" selected>All Categories</option>
+              <option value="chairs">Chairs</option>
+              <option value="stands">Stands</option>
+              <option value="tables">Tables</option>
+              <option value="accessory">Accessory</option>
+            </select>
+          </div>
+          <input type="text" id="keyword" name="keyword"
+                   class="form-control border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 form-control-lg"
+                   placeholder="Search Something...">
+          <div class="input-group-append position-absolute pos-fixed-right-center">
+            <button class="input-group-text bg-transparent border-0 text-white fs-30 px-0 btn-lg"
+                        type="submit"><i
+                        class="far fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    </div>
+
+
   <!-- ===== Floating WhatsApp Button (Right Bottom) ===== -->
   <a href="https://wa.me/6287776304443" target="_blank" class="wa-float">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
