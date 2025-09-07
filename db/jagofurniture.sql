@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Sep 2025 pada 16.53
+-- Waktu pembuatan: 07 Sep 2025 pada 18.24
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -47,6 +47,29 @@ INSERT INTO `tb_banner` (`banner_id`, `banner_tittle`, `banner_sub`, `banner_ima
 (2, 'Jago Furniture', 'Profesional dan berpengalaman lebih dari 10 tahun di Industri.', 'banner-01.jpg', 'Visit', 'https://jagofurniture.com/product.html', 'banner 1'),
 (3, 'Custom', 'Custom Furniture', 'c_13.jpg', 'Hubungi Kami', 'https://wa.me/6287776304443', 'banner 2'),
 (4, 'Project', 'Interior Design', 'c_14.jpg', 'Hubungi Kami', 'https://wa.me/6287776304443', 'banner 3');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_blog`
+--
+
+CREATE TABLE `tb_blog` (
+  `blog_id` int(11) NOT NULL,
+  `blog_slug` varchar(255) NOT NULL,
+  `blog_date` date NOT NULL,
+  `blog_tittle` text NOT NULL,
+  `blog_short` text NOT NULL,
+  `blog_desc` text NOT NULL,
+  `blog_created` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_blog`
+--
+
+INSERT INTO `tb_blog` (`blog_id`, `blog_slug`, `blog_date`, `blog_tittle`, `blog_short`, `blog_desc`, `blog_created`) VALUES
+(1, 'alasan-memilih-custom-furniture', '2025-09-07', '5 Alasan Memilih Custom Furniture untuk Rumah Anda', 'Rumah Anda adalah cerminan kepribadian Anda. Jadi, kenapa harus puas dengan furnitur pasaran yang sama seperti milik orang lain? Custom furniture memberi Anda kebebasan untuk menentukan desain, material, dan ukuran yang pas, sehingga setiap sudut rumah terasa lebih personal.\r\n\r\n', 'Rumah Anda adalah cerminan kepribadian Anda. Jadi, kenapa harus puas dengan furnitur pasaran yang sama seperti milik orang lain? Custom furniture memberi Anda kebebasan untuk menentukan desain, material, dan ukuran yang pas, sehingga setiap sudut rumah terasa lebih personal.\r\n\r\nRumah Anda adalah cerminan kepribadian Anda. Jadi, kenapa harus puas dengan furnitur pasaran yang sama seperti milik orang lain? Custom furniture memberi Anda kebebasan untuk menentukan desain, material, dan ukuran yang pas, sehingga setiap sudut rumah terasa lebih personal.\r\n\r\nRumah Anda adalah cerminan kepribadian Anda. Jadi, kenapa harus puas dengan furnitur pasaran yang sama seperti milik orang lain? Custom furniture memberi Anda kebebasan untuk menentukan desain, material, dan ukuran yang pas, sehingga setiap sudut rumah terasa lebih personal.\r\n', 'Jago Furniture');
 
 -- --------------------------------------------------------
 
@@ -96,7 +119,19 @@ INSERT INTO `tb_product` (`product_id`, `product_category_id`, `product_category
 (1, 1, 'Booth', 'booth1.jpg', 'yes'),
 (2, 1, 'Booth ', 'booth2.jpg', 'yes'),
 (3, 1, 'Booth Portable', 'portable1.jpg', 'yes'),
-(4, 1, 'Booth', 'booth4.jpg', 'no');
+(4, 1, 'Booth', 'booth4.jpg', 'no'),
+(5, 1, 'Booth', 'booth1.jpg', 'yes'),
+(6, 1, 'Booth ', 'booth2.jpg', 'yes'),
+(7, 1, 'Booth Portable', 'portable1.jpg', 'yes'),
+(8, 1, 'Booth', 'booth4.jpg', 'no'),
+(9, 1, 'Booth', 'booth1.jpg', 'yes'),
+(10, 1, 'Booth ', 'booth2.jpg', 'yes'),
+(11, 1, 'Booth Portable', 'portable1.jpg', 'yes'),
+(12, 1, 'Booth', 'booth4.jpg', 'no'),
+(13, 1, 'Booth', 'booth1.jpg', 'yes'),
+(14, 1, 'Booth ', 'booth2.jpg', 'yes'),
+(15, 1, 'Booth Portable', 'portable1.jpg', 'yes'),
+(16, 1, 'Booth', 'booth4.jpg', 'no');
 
 -- --------------------------------------------------------
 
@@ -128,11 +163,20 @@ INSERT INTO `tb_product_category` (`category_id`, `category_name`) VALUES
 CREATE TABLE `tb_testimoni` (
   `testimoni_id` int(11) NOT NULL,
   `testimoni_images` text NOT NULL,
-  `testimoni_rate` int(11) NOT NULL,
   `testimoni_desc` text NOT NULL,
   `testimoni_name` varchar(255) NOT NULL,
   `testimoni_place` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_testimoni`
+--
+
+INSERT INTO `tb_testimoni` (`testimoni_id`, `testimoni_images`, `testimoni_desc`, `testimoni_name`, `testimoni_place`) VALUES
+(1, 'tes_01.png', 'Kesekian kalinya, saya order booth portabel utk bisnis saya dan saya puas sama hasilnya. Recommended', 'Siti Nurhapipah', 'Booth Portabel'),
+(2, 'tes_02.png', 'Pengerjaan cepat tapi rapih, saya order gerobak dorong untuk jualan saya dan saya puas banget. Makasih ya.', 'Alfie', 'Gerobak Bisnis'),
+(3, 'tes_03.png', 'Harga terjagkau, gratis ongkir juga dan kualitas bagus, saya order container di sini dan puas.', 'Adelia Fernanda', 'Booth Container'),
+(4, 'tes_03.png', 'Jujur puas dengan hasilnya gak mengecewakan. Mantab semoga awet selalu', 'Beta Indrawan', 'Booth Container');
 
 --
 -- Indexes for dumped tables
@@ -143,6 +187,12 @@ CREATE TABLE `tb_testimoni` (
 --
 ALTER TABLE `tb_banner`
   ADD PRIMARY KEY (`banner_id`);
+
+--
+-- Indeks untuk tabel `tb_blog`
+--
+ALTER TABLE `tb_blog`
+  ADD PRIMARY KEY (`blog_id`);
 
 --
 -- Indeks untuk tabel `tb_header`
@@ -180,6 +230,12 @@ ALTER TABLE `tb_banner`
   MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_blog`
+--
+ALTER TABLE `tb_blog`
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_header`
 --
 ALTER TABLE `tb_header`
@@ -189,7 +245,7 @@ ALTER TABLE `tb_header`
 -- AUTO_INCREMENT untuk tabel `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_product_category`
@@ -201,7 +257,7 @@ ALTER TABLE `tb_product_category`
 -- AUTO_INCREMENT untuk tabel `tb_testimoni`
 --
 ALTER TABLE `tb_testimoni`
-  MODIFY `testimoni_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `testimoni_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
