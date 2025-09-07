@@ -88,7 +88,7 @@
           <?php foreach ($product as $row_product): ?>
           <div class="box" data-animate="fadeInUp">
             <div class="card border-0 hover-change-content product">
-              <div style="background-image: url('assets/images/product/<?php echo $row_product['product_images']?>')"
+              <div style="background-image: url('assets/images/product/<?php echo $row_product['product_images']; ?>')"
                 class="card-img ratio bg-img-cover-center ratio-1-1">
               </div>
               <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
@@ -179,11 +179,13 @@
         <h2 class="mb-10 text-center fs-30 fs-md-40">Testimoni Pelanggan</h2>
         <div class="slick-slider custom-arrow-1"
           data-slick-options='{"slidesToShow": 3,"infinite":true,"autoplay":false,"dots":false,"arrows":true,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":2,"arrows":false,"dots":true}},{"breakpoint": 576,"settings": {"slidesToShow": 1,"arrows":false,"dots":true}}]}'>
+
+          <?php foreach ($testimoni as $row_testimoni): ?>
           <div class="box" data-animate="fadeInUp">
             <div class="card border-0">
               <div class="card-body px-3 py-0 text-center">
                 <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_01.png" alt="Sampson Totton">
+                  <img src="assets/images/testimoni/<?php echo $row_testimoni['testimoni_images']; ?>" alt="Sampson Totton">
                 </div>
                 <ul class="list-inline mb-4">
                   <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
@@ -192,127 +194,16 @@
                   <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
                   <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
                 </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “Kesekian kalinya, saya order booth portabel utk bisnis saya dan saya puas sama hasilnya. Recommended.
-                  “
+                <p class="card-text mb-4 font-weight-500">“<?php echo $row_testimoni['testimoni_desc']; ?>“
                 </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Siti Nurhapipah</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Booth Portabel
+                <p class="card-text text-primary font-weight-bold mb-1 fs-15"><?php echo $row_testimoni['testimoni_name']; ?></p>
+                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500"><?php echo $row_testimoni['testimoni_place']; ?>
                 </p>
               </div>
             </div>
           </div>
-          <div class="box" data-animate="fadeInUp">
-            <div class="card border-0">
-              <div class="card-body px-3 py-0 text-center">
-                <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_02.png" alt="Alfie Wood">
-                </div>
-                <ul class="list-inline mb-4">
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “ Pengerjaan cepat tapi rapih, saya order gerobak dorong untuk jualan saya dan saya puas banget.
-                  Makasih ya. “
-                </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Alfie</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Gerobak Bisnis
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="box" data-animate="fadeInUp">
-            <div class="card border-0">
-              <div class="card-body px-3 py-0 text-center">
-                <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_03.png" alt="Herse Hedman">
-                </div>
-                <ul class="list-inline mb-4">
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “Harga terjagkau, gratis ongkir juga dan kualitas bagus, saya order container di sini dan puas.“
-                </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Adelia Fernanda</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Booth Container
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="box" data-animate="fadeInUp">
-            <div class="card border-0">
-              <div class="card-body px-3 py-0 text-center">
-                <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_01.png" alt="Herse Hedman">
-                </div>
-                <ul class="list-inline mb-4">
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for
-                  style.”“
-                </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Herse Hedman</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Potato Chair</p>
-              </div>
-            </div>
-          </div>
-          <div class="box" data-animate="fadeInUp">
-            <div class="card border-0">
-              <div class="card-body px-3 py-0 text-center">
-                <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_02.png" alt="Herse Hedman">
-                </div>
-                <ul class="list-inline mb-4">
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for
-                  style.”“
-                </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Herse Hedman</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Potato Chair</p>
-              </div>
-            </div>
-          </div>
-          <div class="box" data-animate="fadeInUp">
-            <div class="card border-0">
-              <div class="card-body px-3 py-0 text-center">
-                <div class="mxw-84px mb-6 mx-auto">
-                  <img src="assets/images/tes_03.png" alt="Herse Hedman">
-                </div>
-                <ul class="list-inline mb-4">
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
-                </ul>
-                <p class="card-text mb-4 font-weight-500">
-                  “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for
-                  style.”“
-                </p>
-                <p class="card-text text-primary font-weight-bold mb-1 fs-15">Herse Hedman</p>
-                <p class="card-text text-muted fs-13 text-uppercase letter-spacing-05 font-weight-500">Potato Chair</p>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
+
         </div>
       </div>
     </section>
