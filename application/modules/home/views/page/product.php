@@ -15,7 +15,7 @@
 	        </button>
 	        Filter
 	      </div>
-	      <div class="ml-auto">
+	      <!-- <div class="ml-auto">
 	        <div class="dropdown">
 	          <a href="#" class="dropdown-toggle fs-14" id="dropdownMenuButton" data-toggle="dropdown"
 	                 aria-haspopup="true" aria-expanded="false">
@@ -27,7 +27,7 @@
 	            <a class="dropdown-item text-primary fs-14" href="#">Random</a>
 	          </div>
 	        </div>
-	      </div>
+	      </div> -->
 	    </div>
 	    <div class="row mb-7 overflow-hidden">
 
