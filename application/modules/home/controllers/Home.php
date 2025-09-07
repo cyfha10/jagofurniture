@@ -42,10 +42,28 @@ class Home extends MX_Controller
 		$data['keywords'] 			= $get_header->header_keywords;
 		$data['product'] 				= $this->General_model->get("tb_product");
 
-		
+
 
     $this->load->view('template/header', $data);
     $this->load->view('page/product', $data);
+    $this->load->view('template/footer', $data);
+	}
+
+	public function about()
+	{
+		$slug 									= $link = $this->uri->segment(1);
+		$get_header 						= $this->General_model->get_ones("tb_header", "slug = '$slug'");
+
+		$data['slug'] 					= $slug;
+		$data['tittle'] 				= $get_header->header_tittle;
+		$data['description'] 		= $get_header->header_description;
+		$data['keywords'] 			= $get_header->header_keywords;
+		$data['product'] 				= $this->General_model->get("tb_product");
+
+		
+
+    $this->load->view('template/header', $data);
+    $this->load->view('page/about', $data);
     $this->load->view('template/footer', $data);
 	}
 
