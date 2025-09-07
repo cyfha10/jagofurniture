@@ -12,7 +12,7 @@
                             </div>
                             <div class="p-2 mt-4">
                                 <!-- Form login dengan action ke method do_login -->
-                                <form action="<?= base_url('login/do_login'); ?>" method="POST">
+                                <form action="<?= site_url('login/do_login'); ?>" method="POST">
 
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Username</label>
