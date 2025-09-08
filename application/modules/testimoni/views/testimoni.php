@@ -825,37 +825,43 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Manage Products</h4>
+                                    <h4 class="card-title mb-0">Manage Testimonials</h4>
                                 </div><!-- end card header -->
                                 <div class="card-body">
-                                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
+                                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTestimoniModal">Add Testimoni</button>
 
-                                    <!-- Table to display products -->
+                                    <!-- Table to display testimoni -->
                                     <div id="table-search">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Category Name</th>
-                                                    <th>Product Image</th>
-                                                    <th>Featured</th>
+                                                    <th>Image</th>
+                                                    <th>Rate</th>
+                                                    <th>Description</th>
+                                                    <th>Name</th>
+                                                    <th>Place</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($products as $product): ?>
+                                                <?php foreach ($testimonis as $testimoni): ?>
                                                     <tr>
-                                                        <td><?= $product->product_id ?></td> <!-- Display product_id -->
-                                                        <td><?= $product->product_category_name ?></td> <!-- Display product_category_name -->
-                                                        <td><img src="<?= base_url('assets/images/product/' . $product->product_images) ?>" width="100" height="100"></td> <!-- Display product image -->
-                                                        <td><?= $product->product_favorite == 'yes' ? 'Yes' : 'No' ?></td> <!-- Display product_favorite -->
+                                                        <td><?= $testimoni->testimoni_id ?></td>
+                                                        <td><img src="<?= base_url('assets/images/testimoni/' . $testimoni->testimoni_images) ?>" width="100" height="100"></td>
+                                                        <td><?= $testimoni->testimoni_rate ?></td>
+                                                        <td><?= $testimoni->testimoni_desc ?></td>
+                                                        <td><?= $testimoni->testimoni_name ?></td>
+                                                        <td><?= $testimoni->testimoni_place ?></td>
                                                         <td>
-                                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal"
-                                                                data-id="<?= $product->product_id ?>"
-                                                                data-category_name="<?= $product->product_category_name ?>"
-                                                                data-image="<?= $product->product_images ?>"
-                                                                data-featured="<?= $product->product_favorite ?>">Edit</button>
-                                                            <a href="<?= site_url('products/delete/' . $product->product_id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editTestimoniModal"
+                                                                data-id="<?= $testimoni->testimoni_id ?>"
+                                                                data-rate="<?= $testimoni->testimoni_rate ?>"
+                                                                data-desc="<?= $testimoni->testimoni_desc ?>"
+                                                                data-name="<?= $testimoni->testimoni_name ?>"
+                                                                data-place="<?= $testimoni->testimoni_place ?>"
+                                                                data-image="<?= $testimoni->testimoni_images ?>">Edit</button>
+                                                            <a href="<?= site_url('testimoni/delete/' . $testimoni->testimoni_id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -894,65 +900,81 @@
                 </div>
             </footer>
 
-            <!-- Modal for Add Product -->
-            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+            <!-- Modal for Add Testimoni -->
+            <div class="modal fade" id="addTestimoniModal" tabindex="-1" aria-labelledby="addTestimoniModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                            <h5 class="modal-title" id="addTestimoniModalLabel">Add Testimoni</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="<?= site_url('products/add') ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= site_url('testimoni/add') ?>" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="productCategoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="productCategoryName" name="category_name" required>
+                                    <label for="testimoniRate" class="form-label">Rate</label>
+                                    <input type="number" class="form-control" id="testimoniRate" name="rate" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="productImage" class="form-label">Product Image</label>
-                                    <input type="file" class="form-control" id="productImage" name="image" required>
+                                    <label for="testimoniDesc" class="form-label">Description</label>
+                                    <textarea class="form-control" id="testimoniDesc" name="desc" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="productFeatured" class="form-label">Featured</label>
-                                    <input type="checkbox" id="productFeatured" name="featured_status">
+                                    <label for="testimoniName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="testimoniName" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="testimoniPlace" class="form-label">Place</label>
+                                    <input type="text" class="form-control" id="testimoniPlace" name="place" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="testimoniImage" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="testimoniImage" name="image" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                <button type="submit" class="btn btn-primary">Add Testimoni</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal for Edit Product -->
-            <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+            <!-- Modal for Edit Testimoni -->
+            <div class="modal fade" id="editTestimoniModal" tabindex="-1" aria-labelledby="editTestimoniModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                            <h5 class="modal-title" id="editTestimoniModalLabel">Edit Testimoni</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="<?= site_url('products/update') ?>" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" id="editProductId" name="id">
+                        <form action="<?= site_url('testimoni/update') ?>" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" id="editTestimoniId" name="testimoni_id">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="editProductCategoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="editProductCategoryName" name="category_name" required>
+                                    <label for="editTestimoniRate" class="form-label">Rate</label>
+                                    <input type="number" class="form-control" id="editTestimoniRate" name="rate" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editProductImage" class="form-label">Product Image</label>
-                                    <input type="file" class="form-control" id="editProductImage" name="image">
+                                    <label for="editTestimoniDesc" class="form-label">Description</label>
+                                    <textarea class="form-control" id="editTestimoniDesc" name="desc" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editProductFeatured" class="form-label">Featured</label>
-                                    <input type="checkbox" id="editProductFeatured" name="featured_status">
+                                    <label for="editTestimoniName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="editTestimoniName" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editTestimoniPlace" class="form-label">Place</label>
+                                    <input type="text" class="form-control" id="editTestimoniPlace" name="place" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editTestimoniImage" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="editTestimoniImage" name="image">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Update Product</button>
+                                <button type="submit" class="btn btn-primary">Update Testimoni</button>
                             </div>
                         </form>
                     </div>
@@ -960,8 +982,26 @@
             </div>
         </div>
 
+        <!-- Script to populate the Edit Testimoni modal -->
+        <script>
+            $('#editTestimoniModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var testimoniId = button.data('id');
+                var testimoniRate = button.data('rate');
+                var testimoniDesc = button.data('desc');
+                var testimoniName = button.data('name');
+                var testimoniPlace = button.data('place');
+                var testimoniImage = button.data('image');
 
-
+                var modal = $(this);
+                modal.find('#editTestimoniId').val(testimoniId);
+                modal.find('#editTestimoniRate').val(testimoniRate);
+                modal.find('#editTestimoniDesc').val(testimoniDesc);
+                modal.find('#editTestimoniName').val(testimoniName);
+                modal.find('#editTestimoniPlace').val(testimoniPlace);
+                modal.find('#editTestimoniImage').val(testimoniImage); // Optionally set the image URL or path if necessary
+            });
+        </script>
     </div>
     <!-- END layout-wrapper -->
 

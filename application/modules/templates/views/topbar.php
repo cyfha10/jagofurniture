@@ -10,19 +10,19 @@
                 <div class="navbar-brand-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="assets/admin/images/logo-dark-sm.png" alt="" height="26">
+                            <img src="<?= base_url('assets/admin/'); ?>images/logo-dark-sm.png" alt="" height="26">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/admin/images/logo-dark-sm.png" alt="" height="26">
+                            <img src="<?= base_url('assets/admin/'); ?>images/logo-dark-sm.png" alt="" height="26">
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-lg">
-                            <img src="assets/admin/images/logo-light.png" alt="" height="30">
+                            <img src="<?= base_url('assets/admin/'); ?>images/logo-light.png" alt="" height="30">
                         </span>
                         <span class="logo-sm">
-                            <img src="assets/admin/images/logo-light-sm.png" alt="" height="26">
+                            <img src="<?= base_url('assets/admin/'); ?>images/logo-light-sm.png" alt="" height="26">
                         </span>
                     </a>
                 </div>
@@ -49,27 +49,27 @@
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
-                            <img src="assets/admin/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
+                            <img src="<?= base_url('assets/admin/'); ?>images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                            <img src="assets/admin/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                            <img src="<?= base_url('assets/admin/'); ?>images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                            <img src="assets/admin/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                            <img src="<?= base_url('assets/admin/'); ?>images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                            <img src="assets/admin/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                            <img src="<?= base_url('assets/admin/'); ?>images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                            <img src="assets/admin/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                            <img src="<?= base_url('assets/admin/'); ?>images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                         </a>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                             <a href="#!" class="text-reset notification-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
-                                        <img src="assets/admin/images/users/avatar-6.jpg" class="rounded-circle avatar-sm" alt="user-pic">
+                                        <img src="<?= base_url('assets/admin/'); ?>images/users/avatar-6.jpg" class="rounded-circle avatar-sm" alt="user-pic">
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="text-muted font-size-13 mb-0 float-end">1 hour ago</p>

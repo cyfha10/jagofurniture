@@ -825,37 +825,31 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Manage Products</h4>
+                                    <h4 class="card-title mb-0">Manage category</h4>
                                 </div><!-- end card header -->
                                 <div class="card-body">
-                                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
+                                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Add Category</button>
 
-                                    <!-- Table to display products -->
+                                    <!-- Table to display category -->
                                     <div id="table-search">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Category Name</th>
-                                                    <th>Product Image</th>
-                                                    <th>Featured</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($products as $product): ?>
+                                                <?php foreach ($category as $category): ?>
                                                     <tr>
-                                                        <td><?= $product->product_id ?></td> <!-- Display product_id -->
-                                                        <td><?= $product->product_category_name ?></td> <!-- Display product_category_name -->
-                                                        <td><img src="<?= base_url('assets/images/product/' . $product->product_images) ?>" width="100" height="100"></td> <!-- Display product image -->
-                                                        <td><?= $product->product_favorite == 'yes' ? 'Yes' : 'No' ?></td> <!-- Display product_favorite -->
+                                                        <td><?= $category->category_id ?></td>
+                                                        <td><?= $category->category_name ?></td>
                                                         <td>
-                                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal"
-                                                                data-id="<?= $product->product_id ?>"
-                                                                data-category_name="<?= $product->product_category_name ?>"
-                                                                data-image="<?= $product->product_images ?>"
-                                                                data-featured="<?= $product->product_favorite ?>">Edit</button>
-                                                            <a href="<?= site_url('products/delete/' . $product->product_id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+                                                                data-id="<?= $category->category_id ?>"
+                                                                data-category_name="<?= $category->category_name ?>">Edit</button>
+                                                            <a href="<?= site_url('category/delete/' . $category->category_id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -894,65 +888,49 @@
                 </div>
             </footer>
 
-            <!-- Modal for Add Product -->
-            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+            <!-- Modal for Add Category -->
+            <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                            <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="<?= site_url('products/add') ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= site_url('category/add') ?>" method="POST">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="productCategoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="productCategoryName" name="category_name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productImage" class="form-label">Product Image</label>
-                                    <input type="file" class="form-control" id="productImage" name="image" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productFeatured" class="form-label">Featured</label>
-                                    <input type="checkbox" id="productFeatured" name="featured_status">
+                                    <label for="categoryName" class="form-label">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" name="category_name" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                <button type="submit" class="btn btn-primary">Add Category</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal for Edit Product -->
-            <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+            <!-- Modal for Edit Category -->
+            <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                            <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="<?= site_url('products/update') ?>" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" id="editProductId" name="id">
+                        <form action="<?= site_url('category/update') ?>" method="POST">
+                            <input type="hidden" id="editCategoryId" name="category_id">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="editProductCategoryName" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="editProductCategoryName" name="category_name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editProductImage" class="form-label">Product Image</label>
-                                    <input type="file" class="form-control" id="editProductImage" name="image">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editProductFeatured" class="form-label">Featured</label>
-                                    <input type="checkbox" id="editProductFeatured" name="featured_status">
+                                    <label for="editCategoryName" class="form-label">Category Name</label>
+                                    <input type="text" class="form-control" id="editCategoryName" name="category_name" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Update Product</button>
+                                <button type="submit" class="btn btn-primary">Update Category</button>
                             </div>
                         </form>
                     </div>
@@ -960,7 +938,19 @@
             </div>
         </div>
 
+        <!-- Script to populate the Edit Category modal -->
+        <script>
+            // When the Edit button is clicked, populate the modal with the category data
+            $('#editCategoryModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var categoryId = button.data('id'); // Extract info from data-* attributes
+                var categoryName = button.data('category_name');
 
+                var modal = $(this);
+                modal.find('#editCategoryId').val(categoryId);
+                modal.find('#editCategoryName').val(categoryName);
+            });
+        </script>
 
     </div>
     <!-- END layout-wrapper -->

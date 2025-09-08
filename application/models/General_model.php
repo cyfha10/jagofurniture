@@ -13,36 +13,103 @@ class General_model extends CI_Model
         return $this->db->get_where($table, $where);
     }
 
+    // Insert new product
     public function insert_product($data)
     {
-        return $this->db->insert('products', $data);
+        return $this->db->insert('tb_product', $data); // Change to tb_product
     }
 
     // Update product
     public function update_product($id, $data)
     {
-        $this->db->where('id', $id);
-        return $this->db->update('products', $data);
+        $this->db->where('product_id', $id); // Change to product_id
+        return $this->db->update('tb_product', $data); // Change to tb_product
     }
 
     // Delete product
     public function delete_product($id)
     {
-        $this->db->where('id', $id);
-        return $this->db->delete('products');
+        $this->db->where('product_id', $id); // Change to product_id
+        return $this->db->delete('tb_product'); // Change to tb_product
     }
 
     // Get all products
     public function get_all_products()
     {
-        return $this->db->get('products')->result();
+        return $this->db->get('tb_product')->result(); // Change to tb_product
     }
 
     // Get a single product by ID
     public function get_product_by_id($id)
     {
-        $this->db->where('id', $id);
-        return $this->db->get('products')->row();
+        $this->db->where('product_id', $id); // Change to product_id
+        return $this->db->get('tb_product')->row(); // Change to tb_product
+    }
+
+    // Create new category
+    public function insert_category($data)
+    {
+        return $this->db->insert('tb_product_category', $data);
+    }
+
+    // Get all categories
+    public function get_all_category()
+    {
+        return $this->db->get('tb_product_category')->result();
+    }
+
+    // Get category by ID
+    public function get_category_by_id($id)
+    {
+        $this->db->where('category_id', $id);
+        return $this->db->get('tb_product_category')->row();
+    }
+
+    // Update category
+    public function update_category($id, $data)
+    {
+        $this->db->where('category_id', $id);
+        return $this->db->update('tb_product_category', $data);
+    }
+
+    // Delete category
+    public function delete_category($id)
+    {
+        $this->db->where('category_id', $id);
+        return $this->db->delete('tb_product_category');
+    }
+
+    // Create new testimoni
+    public function insert_testimoni($data)
+    {
+        return $this->db->insert('tb_testimoni', $data);
+    }
+
+    // Get all testimonials
+    public function get_all_testimoni()
+    {
+        return $this->db->get('tb_testimoni')->result();
+    }
+
+    // Get testimoni by ID
+    public function get_testimoni_by_id($id)
+    {
+        $this->db->where('testimoni_id', $id);
+        return $this->db->get('tb_testimoni')->row();
+    }
+
+    // Update testimoni
+    public function update_testimoni($id, $data)
+    {
+        $this->db->where('testimoni_id', $id);
+        return $this->db->update('tb_testimoni', $data);
+    }
+
+    // Delete testimoni
+    public function delete_testimoni($id)
+    {
+        $this->db->where('testimoni_id', $id);
+        return $this->db->delete('tb_testimoni');
     }
 
 

@@ -6,6 +6,10 @@ class Products extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('username')) {
+            // If not logged in, redirect to the login page
+            redirect('login');
+        }
         $this->load->model('general_model'); // Load General_model
     }
 
@@ -27,12 +31,10 @@ class Products extends MX_Controller
     {
         // Handle the form submission for adding a new product
         $data = [
-            'name' => $this->input->post('name'),
-            'category' => $this->input->post('category'),
-            'description' => $this->input->post('description'),
-            'price' => $this->input->post('price'),
-            'image' => $this->upload_image(), // Handle image upload
-            'featured_status' => $this->input->post('featured_status') ? 1 : 0
+            'product_category_id' => $this->input->post('category'),  // Link to the product category
+            'product_category_name' => $this->input->post('category_name'), // category name
+            'product_images' => $this->upload_image(), // Handle image upload
+            'product_favorite' => $this->input->post('featured_status') ? 'yes' : 'no' // Convert to 'yes' or 'no'
         ];
 
         $this->general_model->insert_product($data); // Insert product into the database
@@ -43,12 +45,10 @@ class Products extends MX_Controller
     public function update($id)
     {
         $data = [
-            'name' => $this->input->post('name'),
-            'category' => $this->input->post('category'),
-            'description' => $this->input->post('description'),
-            'price' => $this->input->post('price'),
-            'image' => $this->upload_image(), // Handle image upload
-            'featured_status' => $this->input->post('featured_status') ? 1 : 0
+            'product_category_id' => $this->input->post('category'),  // Link to the product category
+            'product_category_name' => $this->input->post('category_name'), // category name
+            'product_images' => $this->upload_image(), // Handle image upload
+            'product_favorite' => $this->input->post('featured_status') ? 'yes' : 'no' // Convert to 'yes' or 'no'
         ];
 
         $this->general_model->update_product($id, $data); // Update product in the database

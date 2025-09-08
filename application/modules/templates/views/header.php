@@ -12,17 +12,17 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/admin/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('assets/admin/'); ?>images/favicon.ico">
 
     <!-- plugin css -->
-    <link href="assets/admin/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/admin/'); ?>libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
-    <link href="assets/admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/admin/'); ?>css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/admin/'); ?>css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/admin/'); ?>css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
 </head>
 
