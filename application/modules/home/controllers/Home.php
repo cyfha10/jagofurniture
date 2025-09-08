@@ -58,7 +58,7 @@ class Home extends MX_Controller
 		$data['tittle'] 				= $get_header->header_tittle;
 		$data['description'] 		= $get_header->header_description;
 		$data['keywords'] 			= $get_header->header_keywords;
-		$data['product'] 				= $this->General_model->get("tb_product");
+		$data['about'] 					= $this->General_model->get_ones("tb_about", "about_id = 1");
 
 		
 
