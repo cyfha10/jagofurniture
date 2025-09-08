@@ -1,5 +1,4 @@
-<main id="content">
-	<br><br>
+<main id="content" style="margin-top: 50px;">
 	<section class="py-10">
 	  <div class="container">
 	    <h1 class="fs-40 mb-1 text-capitalize text-center">Semua Produk</h1>
