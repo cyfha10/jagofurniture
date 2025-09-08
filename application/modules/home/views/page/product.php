@@ -64,3 +64,37 @@
 	  </div>
 	</section>
 </main>
+
+<div class="canvas-sidebar filter-canvas">
+  <div class="canvas-overlay">
+  </div>
+  <form class="h-100">
+    <div class="card border-0 pt-5 pb-8 pb-sm-13 h-100">
+      <div class="px-6 pl-sm-8 text-right">
+        <span class="canvas-close d-inline-block text-right fs-24 mb-1 ml-auto lh-1 text-primary"><i
+                    class="fal fa-times"></i></span>
+      </div>
+      <div class="card-body px-6 px-sm-8 pt-7 overflow-y-auto">
+        <div class="card border-0 mb-7">
+          <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+              Kategori
+            </h3>
+          </div>
+          <div class="card-body px-0 pt-4 pb-0">
+            <ul class="list-unstyled mb-0">
+
+            	<?php foreach ($category as $row_category): ?>
+              <li class="mb-1">
+                <a href="<?php echo base_url('categories/'.$row_category['category_slug']); ?>" class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12"><?php echo $row_category['category_name']?></a>
+              </li>
+              <?php endforeach; ?>
+              
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+</div>
