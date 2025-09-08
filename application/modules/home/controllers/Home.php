@@ -41,6 +41,7 @@ class Home extends MX_Controller
 			$data['description'] 		= $get_header->header_description;
 			$data['keywords'] 			= $get_header->header_keywords;
 			$data['product'] 				= $this->General_model->get("tb_product");
+			$data['category'] 			= $this->General_model->get("tb_product_category");
 
 
 
@@ -48,6 +49,33 @@ class Home extends MX_Controller
 	    $this->load->view('page/product', $data);
 	    $this->load->view('template/footer', $data);
 	}
+
+	public function categories($slugs = null)
+	{
+			$slug 									= $link = $this->uri->segment(1);
+			$get_header 						= $this->General_model->get_ones("tb_header", "slug = '$slug'");
+
+			if ($slugs != '') {
+					$data['slug'] 					= $slug;
+					$data['tittle'] 				= $get_header->header_tittle;
+					$data['description'] 		= $get_header->header_description;
+					$data['keywords'] 			= $get_header->header_keywords;
+					$data['category'] 			= $this->General_model->get("tb_product_category");
+					
+					$get_categories 				= $this->General_model->get_ones("tb_product_category", "category_slug = '$slugs'");
+					$category_name 					= $get_categories->category_name;
+					$data['product'] 				= $this->General_model->get_one("tb_product", "product_category_name = '$category_name'");
+
+
+					$this->load->view('template/header', $data);
+			    $this->load->view('page/category_product', $data);
+			    $this->load->view('template/footer', $data);
+			    
+			}
+
+			
+	}
+
 
 	public function about()
 	{
