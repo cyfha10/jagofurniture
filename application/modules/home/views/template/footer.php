@@ -3,58 +3,37 @@
       <div class="row">
         <div class="col-md-8 col-lg-4 mb-6 mb-lg-0">
           <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05">JAGO FURNITURE</h3>
-          <p>Jago Furniture adalah Usaha Dagang yang bergerak dibidang mebel dan custom furniture dengan memiliki
-            pengalaman di bidang meuel lebih dari 10+ tahun melayani lebih dari 500+ customer di area jabodetabek</p>
+          <p align="justify"><?php echo $about->about_desc_footer; ?></p>
         </div>
         <div class="col-md-4 col-lg-2 mb-6 mb-lg-0">
           <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05">Menu</h3>
           <ul class="list-unstyled mb-0">
-            <li class="py-0"><a href="index.html" class="text-gray hover-primary lh-2 font-weight-500">Home</a> </li>
-            <li class="py-0"><a href="product.html" class="text-gray hover-primary lh-2 font-weight-500">Products</a>
+            <li class="py-0"><a href="<?php echo base_url(); ?>" class="text-gray hover-primary lh-2 font-weight-500">Home</a> </li>
+            <li class="py-0"><a href="<?php echo base_url('product'); ?>" class="text-gray hover-primary lh-2 font-weight-500">Products</a>
             </li>
-            <li class="py-0"><a href="about-us.html" class="text-gray hover-primary lh-2 font-weight-500">About</a>
+            <li class="py-0"><a href="<?php echo base_url('aboutus'); ?>" class="text-gray hover-primary lh-2 font-weight-500">About</a>
             </li>
-            <li class="py-0"><a href="blog.html" class="text-gray hover-primary lh-2 font-weight-500">Blog</a> </li>
+            <li class="py-0"><a href="<?php echo base_url('blog'); ?>" class="text-gray hover-primary lh-2 font-weight-500">Blog</a> </li>
           </ul>
         </div>
         <div class="col-md-4 col-lg-2 mb-6 mb-lg-0">
           <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05">follow us</h3>
           <ul class="list-unstyled mb-0">
-            <li class="py-0"><a href="#" class="text-gray hover-primary lh-2 font-weight-500">Facebook</a> </li>
-            <li class="py-0"><a href="#" class="text-gray hover-primary lh-2 font-weight-500">Instagram</a> </li>
-            <li class="py-0"><a href="#" class="text-gray hover-primary lh-2 font-weight-500">Tiktok</a> </li>
+          	<?php foreach ($socialmedia as $row_socialmedia): ?>
+		            <li class="py-0"><a href="<?php echo $row_socialmedia['socialmedia_link']?>" class="text-gray hover-primary lh-2 font-weight-500"><?php echo $row_socialmedia['socialmedia_name']?></a> </li>
+		          <?php endforeach; ?>
           </ul>
         </div>
         <div class="col-md-6 col-lg-3 mb-6 mb-lg-0">
           <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05">Kontak Kami</h3>
-          <p>Jkt Outer Ring Road Jl. Raya Pondok Randu No.2, RW.2, Duri Kosambi, Kecamatan Cengkareng, Kota Jakarta
-            Barat, Daerah Khusus Ibukota Jakarta 11750</p>
+          <p align="justify"><?php echo $about->about_alamat; ?></p>
         </div>
       </div>
       <div class="mt-2 mt-md-7 row align-items-center">
         <p class="col-md-auto mb-4 mb-md-0 text-gray lh-1 fs-14 font-weight-500">
           © 2025 Jago Furniture. All rights reserved.
         </p>
-        <ul class="list-inline mb-0 col-md-6 ml-auto text-md-right">
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_01.png" alt="Amex"></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_02.png" alt="G-Pay"></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_03.png" alt="Master Card"></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_04.png" alt="Paypal"></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_05.png" alt="D-Pay"></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#"><img src="<?php echo base_url(); ?>assets/images/card_06.png" alt="V-Card"></a>
-          </li>
-        </ul>
+        
       </div>
     </div>
   </footer>
