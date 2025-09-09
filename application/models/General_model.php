@@ -59,11 +59,14 @@ class General_model extends CI_Model
     }
 
     // Get category by ID
+    // Mengambil kategori berdasarkan ID
     public function get_category_by_id($id)
     {
         $this->db->where('category_id', $id);
-        return $this->db->get('tb_product_category')->row();
+        return $this->db->get('tb_product_category')->row(); // Pastikan 'tb_product_category' adalah nama tabel yang benar
+
     }
+
 
     // Update category
     public function update_category($id, $data)
@@ -102,8 +105,9 @@ class General_model extends CI_Model
     public function update_testimoni($id, $data)
     {
         $this->db->where('testimoni_id', $id);
-        return $this->db->update('tb_testimoni', $data);
+        return $this->db->update('tb_testimoni', $data); // Update data testimoni di database
     }
+
 
     // Delete testimoni
     public function delete_testimoni($id)
@@ -112,6 +116,37 @@ class General_model extends CI_Model
         return $this->db->delete('tb_testimoni');
     }
 
+    // Ambil semua data header
+    public function get_all_headers()
+    {
+        return $this->db->get('tb_header')->result(); // Mengambil semua data dari tb_header
+    }
+
+    // Ambil header berdasarkan ID
+    public function get_header_by_id($id)
+    {
+        return $this->db->get_where('tb_header', ['header_id' => $id])->row(); // Ambil data berdasarkan header_id
+    }
+
+    // Menyimpan header baru
+    public function insert_header($data)
+    {
+        return $this->db->insert('tb_header', $data); // Insert data ke tb_header
+    }
+
+    // Update header berdasarkan ID
+    public function update_header($id, $data)
+    {
+        $this->db->where('header_id', $id); // Tentukan ID header yang akan diupdate
+        return $this->db->update('tb_header', $data); // Update data header
+    }
+
+    // Hapus header berdasarkan ID
+    public function delete_header($id)
+    {
+        $this->db->where('header_id', $id);
+        return $this->db->delete('tb_header'); // Hapus data header
+    }
 
     public function get($table)
     {

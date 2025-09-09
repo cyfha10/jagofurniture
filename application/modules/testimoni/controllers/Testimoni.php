@@ -12,15 +12,24 @@ class Testimoni extends MX_Controller
         $this->load->model('general_model'); // Load General_model
     }
 
+    private function _load_common_data()
+    {
+        // Ambil data kategori untuk ditampilkan
+        $data['testimonis'] = $this->general_model->get_all_testimoni(); // Ambil semua kategori
+        return $data;
+    }
+
     // Display all testimonials
     public function index()
     {
+        $data = $this->_load_common_data();
         $data['title'] = 'Manage Testimonials';
-        $data['testimonis'] = $this->general_model->get_all_testimoni(); // Get all testimonis from the model
+        // Get all testimonis from the model
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
         $this->load->view('testimoni/testimoni', $data);  // Load the testimonial management view
         $this->load->view('templates/footer');
     }
@@ -40,19 +49,8 @@ class Testimoni extends MX_Controller
         redirect('testimoni');
     }
 
-    // Edit testimoni
-    public function edit($id)
-    {
-        $data['testimoni'] = $this->general_model->get_testimoni_by_id($id); // Get testimoni by ID
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('testimoni/edit', $data);  // Load the edit testimoni view
-        $this->load->view('templates/footer');
-    }
-
     // Update testimoni
-    public function update()
+    public function update_testimoni()
     {
         $id = $this->input->post('testimoni_id');
         $data = [
@@ -65,6 +63,25 @@ class Testimoni extends MX_Controller
 
         $this->general_model->update_testimoni($id, $data); // Update testimoni in the database
         redirect('testimoni');
+    }
+
+
+    public function update($id)
+    {
+        // Mengambil data kategori untuk ditampilkan
+        $data['testimoni'] = $this->general_model->get_testimoni_by_id($id); // Ambil kategori berdasarkan ID
+
+        if (!$data['testimoni']) {
+            show_404(); // Jika tidak ada data kategori, tampilkan error 404
+        }
+
+        // Memuat view dan menampilkan data kategori yang sudah ada
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('testimoni/testimoni', $data);  // Mengirim data kategori ke view
+        $this->load->view('templates/footer');
     }
 
     // Delete testimoni
