@@ -1,207 +1,132 @@
-<!-- Begin page -->
-<div id="layout-wrapper">
+<body class="light-sidebar-nav">
 
-
-
-    <header id="page-topbar" class="isvertical-topbar">
-        <div class="navbar-header">
-            <div class="d-flex">
-                <!-- LOGO -->
-                <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
-                        <span class="logo-sm">
-                            <img src="<?= base_url('assets/admin/'); ?>images/logo-dark-sm.png" alt="" height="26">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="<?= base_url('assets/admin/'); ?>images/logo-dark-sm.png" alt="" height="26">
-                        </span>
-                    </a>
-
-                    <a href="index.html" class="logo logo-light">
-                        <span class="logo-lg">
-                            <img src="<?= base_url('assets/admin/'); ?>images/logo-light.png" alt="" height="30">
-                        </span>
-                        <span class="logo-sm">
-                            <img src="<?= base_url('assets/admin/'); ?>images/logo-light-sm.png" alt="" height="26">
-                        </span>
-                    </a>
-                </div>
-
-                <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
-                    <i class="bx bx-menu align-middle"></i>
-                </button>
-
-                <!-- start page title -->
-                <div class="page-title-box align-self-center d-none d-md-block">
-                    <h4 class="page-title mb-0">Hi, Welcome Back!</h4>
-                </div>
-                <!-- end page title -->
-
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <i class="fa fa-bars"></i>
             </div>
-
-            <div class="d-flex">
-
-                <div class="dropdown d-inline-block language-switch ms-2">
-                    <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="header-lang-img" src="assets/admin/images/flags/us.jpg" alt="Header Language" height="18">
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
-                            <img src="<?= base_url('assets/admin/'); ?>images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
+            <!--logo start-->
+            <a href="index.html" class="logo">Flat<span>lab</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge badge-success">6</span>
                         </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                            <img src="<?= base_url('assets/admin/'); ?>images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                            <img src="<?= base_url('assets/admin/'); ?>images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                            <img src="<?= base_url('assets/admin/'); ?>images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                            <img src="<?= base_url('assets/admin/'); ?>images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item noti-icon"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-search icon-sm align-middle"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
-                        <form class="p-2">
-                            <div class="search-box">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control rounded bg-light border-0" placeholder="Search...">
-                                    <i class="bx bx-search search-icon"></i>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown-v"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-bell icon-sm align-middle"></i>
-                        <span class="noti-dot bg-danger rounded-pill">4</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end p-0"
-                        aria-labelledby="page-header-notifications-dropdown-v">
-                        <div class="p-3">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h5 class="m-0 font-size-15"> Notifications </h5>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#!" class="small fw-semibold text-decoration-underline"> Mark all as read</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div data-simplebar style="max-height: 250px;">
-                            <a href="#!" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <img src="assets/admin/images/users/avatar-3.jpg" class="rounded-circle avatar-sm" alt="user-pic">
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 6 pending tasks</p>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div class="desc">Dashboard v1.3</div>
+                                        <div class="percent">40%</div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <p class="text-muted font-size-13 mb-0 float-end">1 hour ago</p>
-                                        <h6 class="mb-1">James Lemire</h6>
-                                        <div>
-                                            <p class="mb-0">It will seem like simplified English.</p>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div class="desc">Database Update</div>
+                                        <div class="percent">60%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div class="desc">Iphone Development</div>
+                                        <div class="percent">87%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 87%">
+                                            <span class="sr-only">87% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div class="desc">Mobile App</div>
+                                        <div class="percent">33%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+                                            <span class="sr-only">33% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div class="desc">Dashboard v1.3</div>
+                                        <div class="percent">45%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                            <span class="sr-only">45% Complete</span>
                                         </div>
                                     </div>
 
-                                </div>
-                            </a>
-                            <a href="#!" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 avatar-sm me-3">
-                                        <span class="avatar-title bg-primary rounded-circle font-size-18">
-                                            <i class="bx bx-cart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="text-muted font-size-13 mb-0 float-end">3 min ago</p>
-                                        <h6 class="mb-1">Your order is placed</h6>
-                                        <div>
-                                            <p class="mb-0">If several languages coalesce the grammar</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#!" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 avatar-sm me-3">
-                                        <span class="avatar-title bg-success rounded-circle font-size-18">
-                                            <i class="bx bx-badge-check"></i>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="text-muted font-size-13 mb-0 float-end">8 min ago</p>
-                                        <h6 class="mb-1">Your item is shipped</h6>
-                                        <div>
-                                            <p class="mb-0">If several languages coalesce the grammar</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="#!" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <img src="<?= base_url('assets/admin/'); ?>images/users/avatar-6.jpg" class="rounded-circle avatar-sm" alt="user-pic">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="text-muted font-size-13 mb-0 float-end">1 hour ago</p>
-                                        <h6 class="mb-1">Salena Layfield</h6>
-                                        <div>
-                                            <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="p-2 border-top d-grid">
-                            <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
-                                <i class="uil-arrow-circle-right me-1"></i> <span>View More..</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown-v"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="assets/admin/images/users/avatar-3.jpg"
-                            alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">Martin Gurley</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end pt-0">
-                        <div class="p-3 border-bottom">
-                            <h6 class="mb-0">Martin Gurley</h6>
-                            <p class="mb-0 font-size-11 text-muted">martin.gurley@email.com</p>
-                        </div>
-                        <a class="dropdown-item" href="contacts-profile.html"><i class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span class="align-middle">Profile</span></a>
-                        <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-2"></i> <span class="align-middle">Messages</span></a>
-                        <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-2"></i> <span class="align-middle">Help</span></a>
-                        <a class="dropdown-item d-flex align-items-center" href="#"><i class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i> <span class="align-middle me-3">Settings</span><span class="badge bg-success-subtle text-success  ms-auto">New</span></a>
-                        <a class="dropdown-item" href="auth-lock-screen.html"><i class="mdi mdi-lock text-muted font-size-16 align-middle me-2"></i> <span class="align-middle">Lock screen</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="auth-logout.html"><i class="mdi mdi-logout text-muted font-size-16 align-middle me-2"></i> <span class="align-middle">Logout</span></a>
-                    </div>
-                </div>
+                                </a>
+                            </li>
+                            <li class="external">
+                                <a href="#">See All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- inbox dropdown start-->
+                    <!-- notification dropdown end -->
+                </ul>
+                <!--  notification end -->
             </div>
-        </div>
-    </header>
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </li>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="<?= base_url('assets/admin/'); ?>img/avatar1_small.jpg">
+                            <span class="username">Jhon Doue</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout dropdown-menu-right">
+                            <div class="log-arrow-up"></div>
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
+                            <li><a href="<?= base_url('login/logout'); ?>"><i class="fa fa-key"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                    <li class="sb-toggle-right">
+                        <i class="fa  fa-align-right"></i>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->

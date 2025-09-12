@@ -1,49 +1,47 @@
-<div class="authentication-bg min-vh-100">
-    <div class="bg-overlay bg-light"></div>
+<body class="login-body">
+
     <div class="container">
-        <div class="d-flex flex-column min-vh-100 px-3 pt-4">
-            <div class="row justify-content-center my-auto">
-                <div class="col-md-8 col-lg-6 col-xl-5">
 
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <div class="text-center mt-2">
-                                <h5><?= $title; ?></h5>
-                            </div>
-                            <div class="p-2 mt-4">
-                                <!-- Form login dengan action ke method do_login -->
-                                <form action="<?= site_url('login/do_login'); ?>" method="POST">
+        <form class="form-signin" action="<?= base_url('login/do_login') ?>" method="POST">
+            <h2 class="form-signin-heading">sign in now</h2>
+            <div class="login-wrap">
+                <input type="text" class="form-control" name="username" id="username" placeholder="User ID" autofocus>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                    <span class="pull-right">
+                        <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
 
-                                    <div class="mb-3">
-                                        <label class="form-label" for="username">Username</label>
-                                        <div class="position-relative input-custom-icon">
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
-                                            <span class="bx bx-user"></span>
-                                        </div>
-                                    </div>
+                    </span>
+                </label>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+                <p>or you can sign in via social network</p>
+            </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label" for="password-input">Password</label>
-                                        <div class="position-relative auth-pass-inputgroup input-custom-icon">
-                                            <span class="bx bx-lock-alt"></span>
-                                            <input type="password" class="form-control" id="password-input" name="password" placeholder="Enter password">
-                                        </div>
-                                    </div>
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 
-                                    <div class="mt-3">
-                                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
-                                    </div>
-                                    <div class="mt-4 text-center">
-                                        <p class="mb-0">Don't Have an Account? <a href="register" class="fw-medium text-primary">Register</a></p>
-                                    </div>
-                                </form>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-success" type="button">Submit</button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- modal -->
 
-                </div><!-- end col -->
-            </div><!-- end row -->
+        </form>
 
-        </div>
-    </div><!-- end container -->
-</div>
+    </div>

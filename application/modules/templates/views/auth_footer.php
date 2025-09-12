@@ -1,9 +1,10 @@
-    <!-- JAVASCRIPT -->
-    <script src="assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/admin/libs/metismenujs/metismenujs.min.js"></script>
-    <script src="assets/admin/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/admin/libs/eva-icons/eva.min.js"></script>
-    <script src="assets/admin/js/pages/pass-addon.init.js"></script>
-    </body>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/bootstrap.bundle.min.js"></script>
 
-    </html>
+
+</body>
+
+<!-- Mirrored from thevectorlab.net/flatlab-4/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 Sep 2025 16:29:03 GMT -->
+
+</html>

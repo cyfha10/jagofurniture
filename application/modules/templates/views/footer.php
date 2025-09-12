@@ -1,217 +1,66 @@
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <script>
-                    document.write(new Date().getFullYear())
-                </script> © webadmin.
-            </div>
-            <div class="col-sm-6">
-                <div class="text-sm-end d-none d-sm-block">
-                    Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://themesdesign.com/" target="_blank" class="text-reset">Themesdesign</a>
-                </div>
-            </div>
-        </div>
+<!--footer start-->
+<footer class="site-footer">
+    <div class="text-center">
+        2018 &copy; FlatLab by VectorLab.
+        <a href="#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
     </div>
 </footer>
-</div>
-<!-- end main content-->
+<!--footer end-->
+</section>
 
-</div>
-<!-- END layout-wrapper -->
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/bootstrap.bundle.min.js"></script>
+<script class="include" type="text/javascript" src="<?= base_url('assets/admin/'); ?>js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.scrollTo.min.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.sparkline.js" type="text/javascript"></script>
+<script src="<?= base_url('assets/admin/'); ?>assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/owl.carousel.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/jquery.customSelect.min.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/respond.min.js"></script>
 
-<!-- Right Sidebar -->
-<a href="#" class="right-bar-toggle layout-setting-btn" id="right-bar-toggle">
-    <i class="bx bx-cog icon-sm font-size-18"></i> <span>Settings</span>
-</a>
+<!--right slidebar-->
+<script src="<?= base_url('assets/admin/'); ?>js/slidebars.min.js"></script>
 
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+<!--common script for all pages-->
+<script src="<?= base_url('assets/admin/'); ?>js/common-scripts.js"></script>
 
-            <h5 class="m-0 me-2 text-white">Theme Customizer</h5>
+<!--script for this page-->
+<script src="<?= base_url('assets/admin/'); ?>js/sparkline-chart.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/easy-pie-chart.js"></script>
+<script src="<?= base_url('assets/admin/'); ?>js/count.js"></script>
 
-            <a href="javascript:void(0);" class="right-bar-toggle-close ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
+<script>
+    //owl carousel
 
-        <!-- Settings -->
-        <hr class="m-0" />
+    $(document).ready(function() {
+        $("#owl-demo").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            singleItem: true,
+            autoPlay: true
 
-        <div class="p-4">
-            <h6 class="mb-3">Layout</h6>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout"
-                    id="layout-vertical" value="vertical">
-                <label class="form-check-label" for="layout-vertical">Vertical</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout"
-                    id="layout-horizontal" value="horizontal">
-                <label class="form-check-label" for="layout-horizontal">Horizontal</label>
-            </div>
+        });
+    });
 
-            <h6 class="mt-4 mb-3">Layout Mode</h6>
+    //custom select box
 
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-mode"
-                    id="layout-mode-light" value="light">
-                <label class="form-check-label" for="layout-mode-light">Light</label>
-            </div>
+    $(function() {
+        $('select.styled').customSelect();
+    });
 
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-mode"
-                    id="layout-mode-dark" value="dark">
-                <label class="form-check-label" for="layout-mode-dark">Dark</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-mode"
-                    id="layout-mode-bordered" value="bordered">
-                <label class="form-check-label" for="layout-mode-bordered">Bordered</label>
-            </div>
-
-            <h6 class="mt-4 mb-3">Layout Width</h6>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-width"
-                    id="layout-width-fluid" value="fluid" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
-                <label class="form-check-label" for="layout-width-fluid">Fluid</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-width"
-                    id="layout-width-boxed" value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
-                <label class="form-check-label" for="layout-width-boxed">Boxed</label>
-            </div>
-
-            <h6 class="mt-4 mb-3">Layout Position</h6>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-position"
-                    id="layout-position-fixed" value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
-                <label class="form-check-label" for="layout-position-fixed">Fixed</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-position"
-                    id="layout-position-scrollable" value="scrollable" onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
-                <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
-            </div>
-
-            <h6 class="mt-4 mb-3">Topbar Type</h6>
-
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="topbar-color"
-                    id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
-                <label class="form-check-label" for="topbar-color-light">Light</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="topbar-color"
-                    id="topbar-color-dark" value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
-                <label class="form-check-label" for="topbar-color-dark">Dark</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="topbar-color"
-                    id="topbar-type-hidden" value="hidden" onchange="document.body.setAttribute('data-topbar', 'hidden')">
-                <label class="form-check-label" for="topbar-type-hidden">Hidden</label>
-            </div>
-
-
-            <div id="sidebar-setting">
-                <h6 class="mt-4 mb-3 sidebar-setting">Sidebar Size</h6>
-
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-size"
-                        id="sidebar-size-default" value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
-                    <label class="form-check-label" for="sidebar-size-default">Default</label>
-                </div>
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-size"
-                        id="sidebar-size-compact" value="compact" onchange="document.body.setAttribute('data-sidebar-size', 'md')">
-                    <label class="form-check-label" for="sidebar-size-compact">Compact</label>
-                </div>
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-size"
-                        id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
-                    <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
-                </div>
-
-                <h6 class="mt-4 mb-3 sidebar-setting">Sidebar Color</h6>
-
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-color"
-                        id="sidebar-color-light" value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
-                    <label class="form-check-label" for="sidebar-color-light">Light</label>
-                </div>
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-color"
-                        id="sidebar-color-dark" value="dark" onchange="document.body.setAttribute('data-sidebar', 'dark')">
-                    <label class="form-check-label" for="sidebar-color-dark">Dark</label>
-                </div>
-                <div class="form-check sidebar-setting">
-                    <input class="form-check-input" type="radio" name="sidebar-color"
-                        id="sidebar-color-brand" value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
-                    <label class="form-check-label" for="sidebar-color-brand">Brand</label>
-                </div>
-            </div>
-
-            <h6 class="mt-4 mb-3">Direction</h6>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-direction"
-                    id="layout-direction-ltr" value="ltr">
-                <label class="form-check-label" for="layout-direction-ltr">LTR</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="layout-direction"
-                    id="layout-direction-rtl" value="rtl">
-                <label class="form-check-label" for="layout-direction-rtl">RTL</label>
-            </div>
-
-        </div>
-
-    </div> <!-- end slimscroll-menu-->
-</div>
-<!-- /Right-bar -->
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
-
-<!-- chat offcanvas -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasActivity" aria-labelledby="offcanvasActivityLabel">
-    <div class="offcanvas-header border-bottom">
-        <h5 id="offcanvasActivityLabel">Offcanvas right</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        ...
-    </div>
-</div>
-<!-- JAVASCRIPT -->
-<script src="<?= base_url('assets/admin/'); ?>libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url('assets/admin/'); ?>libs/metismenujs/metismenujs.min.js"></script>
-<script src="<?= base_url('assets/admin/'); ?>libs/simplebar/simplebar.min.js"></script>
-<script src="<?= base_url('assets/admin/'); ?>libs/eva-icons/eva.min.js"></script>
-
-<!-- apexcharts -->
-<script src="<?= base_url('assets/admin/'); ?>libs/apexcharts/apexcharts.min.js"></script>
-
-<!-- Vector map-->
-<script src="<?= base_url('assets/admin/'); ?>libs/jsvectormap/js/jsvectormap.min.js"></script>
-<script src="<?= base_url('assets/admin/'); ?>libs/jsvectormap/maps/world-merc.js"></script>
-<!-- dashboard init -->
-<script src="<?= base_url('assets/admin/'); ?>js/pages/dashboard.init.js"></script>
-
-
-
-<script src="<?= base_url('assets/admin/'); ?>js/app.js"></script>
+    $(window).on("resize", function() {
+        var owl = $("#owl-demo").data("owlCarousel");
+        owl.reinit();
+    });
+</script>
 
 </body>
 
-
-<!-- Mirrored from themesdesign.in/webadmin/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Aug 2024 02:45:49 GMT -->
+<!-- Mirrored from thevectorlab.net/flatlab-4/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 Sep 2025 16:28:58 GMT -->
 
 </html>
