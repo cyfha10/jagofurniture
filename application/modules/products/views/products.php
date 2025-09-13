@@ -114,15 +114,7 @@
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Gambar</th>
-                                        <th>Kategori</th>
-                                        <th class="hidden-phone">Favorit</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
 
                             <!-- ===== Fallback pager (muncul hanya jika DataTables tidak ada) ===== -->
