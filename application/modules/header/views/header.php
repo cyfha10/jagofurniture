@@ -70,24 +70,14 @@
                                                 </td>
                                                 <td class="hidden-phone">
                                                     <a href="<?= site_url('header/update/' . $h['header_id']); ?>" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i> 
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Logo</th>
-                                        <th>Slug</th>
-                                        <th>Page</th>
-                                        <th>Title</th>
-                                        <th>Keywords</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
 
                             <!-- Fallback pager -->
