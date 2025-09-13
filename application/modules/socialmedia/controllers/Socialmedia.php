@@ -13,6 +13,10 @@ class Socialmedia extends CI_Controller
         $this->load->model('General_model', 'gm');
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session']);
+        if (!$this->session->userdata('username')) {
+            // If not logged in, redirect to the login page
+            redirect('login');
+        }
     }
 
     // LIST

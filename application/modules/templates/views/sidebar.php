@@ -16,13 +16,13 @@
                 </a>
                 <ul class="sub">
                     <li><a href="<?= base_url('banner'); ?>">BANNER</a></li>
-                    <li><a href="<?= base_url('blog'); ?>">BLOG</a></li>
+                    <li><a href="<?= base_url('blogs'); ?>">BLOG</a></li>
                     <li><a href="<?= base_url('category'); ?>">CATEGORY</a></li>
                     <li><a href="<?= base_url('products'); ?>">PRODUCT</a></li>
                     <li><a href="<?= base_url('testimoni'); ?>">TESTIMONI</a></li>
                     <li><a href="<?= base_url('socialmedia'); ?>">SOCIAL MEDIA</a></li>
                     <li><a href="<?= base_url('header'); ?>">HEADER</a></li>
-                    <li><a href="<?= base_url('aboutus'); ?>">ABOUT US</a></li>
+                    <li><a href="<?= base_url('about'); ?>">ABOUT US</a></li>
                 </ul>
             </li>
 

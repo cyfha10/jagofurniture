@@ -14,6 +14,10 @@ class Testimoni extends CI_Controller
         $this->load->model('General_model', 'gm');
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session', 'upload']);
+        if (!$this->session->userdata('username')) {
+            // If not logged in, redirect to the login page
+            redirect('login');
+        }
 
         if (!is_dir(FCPATH . $this->upload_path)) {
             @mkdir(FCPATH . $this->upload_path, 0755, true);
