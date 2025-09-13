@@ -29,8 +29,26 @@
                             </button>
                         </div>
 
+                        <!-- Search UI -->
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-2">
+                                <input id="searchKeyword" type="text" class="form-control"
+                                    placeholder="Cari kategori (nama/slug)..." autocomplete="off">
+                            </div>
+                            <div class="col-md-6 mb-2 text-right">
+                                <!-- Fallback: pilih baris per halaman -->
+                                <select id="fallbackRowsPerPage" class="form-control d-inline-block" style="max-width:160px; display:none;">
+                                    <option value="5">5 / halaman</option>
+                                    <option value="10" selected>10 / halaman</option>
+                                    <option value="25">25 / halaman</option>
+                                    <option value="50">50 / halaman</option>
+                                    <option value="100">100 / halaman</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="adv-table">
-                            <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <table class="display table table-bordered table-striped" id="dynamic-table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th width="60">#</th>
@@ -70,6 +88,18 @@
                                     </tr>
                                 </tfoot>
                             </table>
+
+                            <!-- Fallback pager -->
+                            <div id="fallbackPager" class="mt-3 d-flex align-items-center justify-content-between" style="display:none;">
+                                <div>
+                                    <button id="btnPrev" class="btn btn-sm btn-light mr-2">&laquo; Prev</button>
+                                    <span id="pageButtons"></span>
+                                    <button id="btnNext" class="btn btn-sm btn-light ml-2">Next &raquo;</button>
+                                </div>
+                                <div class="text-muted small">
+                                    <span id="rangeInfo">Menampilkan 0–0 dari 0</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -151,11 +181,140 @@
     </div>
 <?php endif; ?>
 
-<!-- Auto-open modal edit bila datang dari /category/update/{id} -->
+<!-- Scripts -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Auto-open modal edit
         <?php if (!empty($category)): ?>
             $('#modalEdit').modal('show');
         <?php endif; ?>
+
+        var $table = $('#dynamic-table');
+        var hasDataTables = (typeof $.fn !== 'undefined' && typeof $.fn.DataTable !== 'undefined');
+        var dt = null;
+
+        if (hasDataTables) {
+            // ====== DataTables mode ======
+            dt = $table.DataTable({
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],
+                order: [
+                    [0, 'asc']
+                ],
+                autoWidth: false,
+                columnDefs: [{
+                        targets: [3],
+                        orderable: false
+                    } // kolom Aksi tidak di-sort
+                ]
+            });
+
+            // Global search
+            $('#searchKeyword').on('keyup change', function() {
+                dt.search(this.value).draw();
+            });
+
+            // Sembunyikan kontrol fallback
+            $('#fallbackRowsPerPage').hide();
+            $('#fallbackPager').hide();
+
+        } else {
+            // ====== Fallback mode (tanpa DataTables) ======
+            var $rows = $table.find('tbody tr');
+            var rowsPerPage = parseInt($('#fallbackRowsPerPage').val() || '10', 10);
+            var currentPage = 1;
+            var filteredIdx = []; // index rows yang lolos filter
+
+            $('#fallbackRowsPerPage').show();
+            $('#fallbackPager').show();
+
+            function recomputeFiltered() {
+                filteredIdx = [];
+                var keyword = ($('#searchKeyword').val() || '').toLowerCase();
+
+                $rows.each(function(i) {
+                    var textAll = $(this).text().toLowerCase();
+                    var passKeyword = !keyword || textAll.indexOf(keyword) !== -1;
+                    if (passKeyword) filteredIdx.push(i);
+                });
+            }
+
+            function renderPage() {
+                var total = filteredIdx.length;
+                var totalPages = Math.max(1, Math.ceil(total / rowsPerPage));
+                if (currentPage > totalPages) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                // Hide all, then show range
+                $rows.hide();
+                var start = (currentPage - 1) * rowsPerPage;
+                var end = Math.min(start + rowsPerPage, total);
+
+                for (var k = start; k < end; k++) {
+                    $rows.eq(filteredIdx[k]).show();
+                }
+
+                // Range info
+                var rangeStart = total === 0 ? 0 : (start + 1);
+                var rangeEnd = end;
+                $('#rangeInfo').text('Menampilkan ' + rangeStart + '–' + rangeEnd + ' dari ' + total);
+
+                // Pager buttons
+                var $pageButtons = $('#pageButtons');
+                $pageButtons.empty();
+
+                var makeBtn = function(label, page, active) {
+                    var $b = $('<button class="btn btn-sm ' + (active ? 'btn-primary' : 'btn-light') + ' mr-1"></button>')
+                        .text(label)
+                        .on('click', function() {
+                            currentPage = page;
+                            renderPage();
+                        });
+                    return $b;
+                };
+
+                // Simple windowed pagination (maks 7 tombol nomor)
+                var windowSize = 7;
+                var half = Math.floor(windowSize / 2);
+                var startPage = Math.max(1, currentPage - half);
+                var endPage = Math.min(totalPages, startPage + windowSize - 1);
+                startPage = Math.max(1, endPage - windowSize + 1);
+
+                for (var p = startPage; p <= endPage; p++) {
+                    $pageButtons.append(makeBtn(p, p, p === currentPage));
+                }
+
+                // Prev/Next
+                $('#btnPrev').prop('disabled', currentPage <= 1).off('click').on('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderPage();
+                    }
+                });
+                $('#btnNext').prop('disabled', currentPage >= totalPages).off('click').on('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderPage();
+                    }
+                });
+            }
+
+            function refilterAndReset() {
+                currentPage = 1;
+                recomputeFiltered();
+                renderPage();
+            }
+
+            // Events
+            $('#searchKeyword').on('keyup change', refilterAndReset);
+            $('#fallbackRowsPerPage').on('change', function() {
+                rowsPerPage = parseInt(this.value, 10) || 10;
+                currentPage = 1;
+                renderPage();
+            });
+
+            // Init
+            refilterAndReset();
+        }
     });
 </script>

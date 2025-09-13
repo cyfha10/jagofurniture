@@ -2,12 +2,11 @@
 
 <section id="main-content">
     <section class="wrapper">
-        <!-- page start-->
         <div class="row">
             <div class="col-sm-12">
                 <section class="card">
                     <header class="card-header d-flex justify-content-between align-items-center">
-                        <span>Testimoni</span>
+                        <span>Social Media</span>
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:;" class="fa fa-times"></a>
@@ -15,7 +14,7 @@
                     </header>
 
                     <div class="card-body">
-                        <!-- Flash messages -->
+                        <!-- Flash -->
                         <?php if ($this->session->flashdata('error')): ?>
                             <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
                         <?php endif; ?>
@@ -23,28 +22,19 @@
                             <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
                         <?php endif; ?>
 
-                        <div class="mb-3 d-flex flex-wrap gap-2">
+                        <div class="mb-3">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Tambah Testimoni
+                                <i class="fa fa-plus"></i> Tambah
                             </button>
                         </div>
 
-                        <!-- Search + Filter Rate (opsional) -->
+                        <!-- Search + Fallback rows/page -->
                         <div class="row mb-3">
                             <div class="col-md-6 mb-2">
                                 <input id="searchKeyword" type="text" class="form-control"
-                                    placeholder="Cari (nama / tempat / deskripsi / rate)..." autocomplete="off">
+                                    placeholder="Cari (nama / link)..." autocomplete="off">
                             </div>
-                            <div class="col-md-6 mb-2 d-flex justify-content-end align-items-center">
-                                <select id="filterRate" class="form-control mr-2" style="max-width:160px;">
-                                    <option value="">Semua Rate</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                </select>
-                                <!-- Hanya untuk fallback -->
+                            <div class="col-md-6 mb-2 d-flex justify-content-end">
                                 <select id="fallbackRowsPerPage" class="form-control" style="max-width:160px; display:none;">
                                     <option value="5">5 / halaman</option>
                                     <option value="10" selected>10 / halaman</option>
@@ -60,41 +50,30 @@
                                 <thead>
                                     <tr>
                                         <th width="60">#</th>
-                                        <th>Gambar</th>
-                                        <th>Rate</th>
-                                        <th>Deskripsi</th>
                                         <th>Nama</th>
-                                        <th>Tempat</th>
-                                        <th width="200" class="hidden-phone">Aksi</th>
+                                        <th>Link</th>
+                                        <th width="180" class="hidden-phone">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($testimonis)): ?>
+                                    <?php if (!empty($rows)): ?>
                                         <?php $no = 1;
-                                        foreach ($testimonis as $t): ?>
-                                            <tr class="gradeX">
+                                        foreach ($rows as $r): ?>
+                                            <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td>
-                                                    <?php if (!empty($t['testimoni_images'])): ?>
-                                                        <img src="<?= base_url('assets/images/testimoni/' . $t['testimoni_images']); ?>"
-                                                            alt="img"
-                                                            style="height:48px;width:48px;object-fit:cover;border-radius:6px;">
-                                                    <?php else: ?>
-                                                        <span class="text-muted">—</span>
-                                                    <?php endif; ?>
+                                                <td><?= htmlspecialchars($r['socialmedia_name']); ?></td>
+                                                <td class="text-truncate" style="max-width:360px;">
+                                                    <a href="<?= htmlspecialchars($r['socialmedia_link']); ?>" target="_blank" rel="noopener">
+                                                        <?= htmlspecialchars($r['socialmedia_link']); ?>
+                                                    </a>
                                                 </td>
-                                                <td><?= htmlspecialchars($t['testimoni_rate']); ?></td>
-                                                <td><?= htmlspecialchars($t['testimoni_desc']); ?></td>
-                                                <td><?= htmlspecialchars($t['testimoni_name']); ?></td>
-                                                <td><?= htmlspecialchars($t['testimoni_place']); ?></td>
                                                 <td class="hidden-phone">
-                                                    <a href="<?= site_url('testimoni/update/' . $t['testimoni_id']); ?>"
-                                                        class="btn btn-sm btn-warning">
+                                                    <a href="<?= site_url('socialmedia/update/' . $r['socialmedia_id']); ?>" class="btn btn-sm btn-warning">
                                                         <i class="fa fa-pencil"></i> Edit
                                                     </a>
-                                                    <a href="<?= site_url('testimoni/delete/' . $t['testimoni_id']); ?>"
+                                                    <a href="<?= site_url('socialmedia/delete/' . $r['socialmedia_id']); ?>"
                                                         class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Hapus testimoni ini?');">
+                                                        onclick="return confirm('Hapus data ini?');">
                                                         <i class="fa fa-trash"></i> Hapus
                                                     </a>
                                                 </td>
@@ -105,11 +84,8 @@
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Gambar</th>
-                                        <th>Rate</th>
-                                        <th>Deskripsi</th>
                                         <th>Nama</th>
-                                        <th>Tempat</th>
+                                        <th>Link</th>
                                         <th class="hidden-phone">Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -131,18 +107,17 @@
                 </section>
             </div>
         </div>
-        <!-- page end-->
     </section>
 </section>
 
 <!-- ========================= -->
-<!-- Modal: Tambah Testimoni -->
+<!-- Modal: Tambah -->
 <!-- ========================= -->
 <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="<?= site_url('testimoni/add'); ?>" method="post" enctype="multipart/form-data" class="modal-content">
+        <form action="<?= site_url('socialmedia/add'); ?>" method="post" class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalAddTitle">Tambah Testimoni</h5>
+                <h5 class="modal-title" id="modalAddTitle">Tambah Social Media</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -150,36 +125,12 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="add_rate">Rate</label>
-                    <select name="testimoni_rate" id="add_rate" class="form-control" required>
-                        <option value="">-- Pilih Rate --</option>
-                        <option>5</option>
-                        <option>4</option>
-                        <option>3</option>
-                        <option>2</option>
-                        <option>1</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="add_desc">Deskripsi</label>
-                    <textarea name="testimoni_desc" id="add_desc" class="form-control" rows="3" required></textarea>
-                </div>
-
-                <div class="form-group">
                     <label for="add_name">Nama</label>
-                    <input type="text" name="testimoni_name" id="add_name" class="form-control" required>
+                    <input type="text" name="socialmedia_name" id="add_name" class="form-control" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="add_place">Tempat</label>
-                    <input type="text" name="testimoni_place" id="add_place" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="add_image">Gambar (opsional)</label>
-                    <input type="file" name="image" id="add_image" class="form-control" accept="image/*">
-                    <small class="text-muted">Maks 2 MB. Tipe: gif, jpg, png, jpeg, webp.</small>
+                    <label for="add_link">Link</label>
+                    <input type="url" name="socialmedia_link" id="add_link" class="form-control" placeholder="https://..." required>
                 </div>
             </div>
 
@@ -192,14 +143,14 @@
 </div>
 
 <!-- ========================= -->
-<!-- Modal: Edit Testimoni (auto-open jika ada $testimoni) -->
+<!-- Modal: Edit (auto-open jika $row ada) -->
 <!-- ========================= -->
-<?php if (!empty($testimoni)): ?>
+<?php if (!empty($row)): ?>
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="<?= site_url('testimoni/update_testimoni/' . $testimoni->testimoni_id); ?>" method="post" enctype="multipart/form-data" class="modal-content">
+            <form action="<?= site_url('socialmedia/update_socialmedia/' . $row->socialmedia_id); ?>" method="post" class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditTitle">Edit Testimoni</h5>
+                    <h5 class="modal-title" id="modalEditTitle">Edit Social Media</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -207,44 +158,14 @@
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="edit_rate">Rate</label>
-                        <select name="testimoni_rate" id="edit_rate" class="form-control" required>
-                            <option value="">-- Pilih Rate --</option>
-                            <?php for ($r = 5; $r >= 1; $r--): ?>
-                                <option value="<?= $r; ?>" <?= ((string)$r === (string)$testimoni->testimoni_rate) ? 'selected' : ''; ?>><?= $r; ?></option>
-                            <?php endfor; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit_desc">Deskripsi</label>
-                        <textarea name="testimoni_desc" id="edit_desc" class="form-control" rows="3" required><?= htmlspecialchars($testimoni->testimoni_desc); ?></textarea>
-                    </div>
-
-                    <div class="form-group">
                         <label for="edit_name">Nama</label>
-                        <input type="text" name="testimoni_name" id="edit_name" class="form-control"
-                            value="<?= htmlspecialchars($testimoni->testimoni_name); ?>" required>
+                        <input type="text" name="socialmedia_name" id="edit_name" class="form-control"
+                            value="<?= htmlspecialchars($row->socialmedia_name); ?>" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="edit_place">Tempat</label>
-                        <input type="text" name="testimoni_place" id="edit_place" class="form-control"
-                            value="<?= htmlspecialchars($testimoni->testimoni_place); ?>" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit_image">Gambar (opsional)</label>
-                        <div class="d-flex align-items-center mb-2">
-                            <?php if (!empty($testimoni->testimoni_images)): ?>
-                                <img src="<?= base_url('assets/images/testimoni/' . $testimoni->testimoni_images); ?>"
-                                    alt="current"
-                                    style="height:48px;width:48px;object-fit:cover;border-radius:6px;margin-right:8px;">
-                            <?php endif; ?>
-                            <span class="text-muted small">Biarkan kosong jika tidak mengubah gambar.</span>
-                        </div>
-                        <input type="file" name="image" id="edit_image" class="form-control" accept="image/*">
-                        <input type="hidden" name="existing_image" value="<?= htmlspecialchars($testimoni->testimoni_images); ?>">
+                        <label for="edit_link">Link</label>
+                        <input type="url" name="socialmedia_link" id="edit_link" class="form-control"
+                            value="<?= htmlspecialchars($row->socialmedia_link); ?>" required>
                     </div>
                 </div>
 
@@ -262,8 +183,8 @@
 <!-- ========================= -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // buka edit modal otomatis jika ada
-        <?php if (!empty($testimoni)): ?>
+        // Auto-open modal edit
+        <?php if (!empty($row)): ?>
             $('#modalEdit').modal('show');
         <?php endif; ?>
 
@@ -272,7 +193,7 @@
         var dt = null;
 
         if (hasDataTables) {
-            // ===== DataTables mode =====
+            // DataTables mode
             dt = $table.DataTable({
                 pageLength: 10,
                 lengthMenu: [5, 10, 25, 50, 100],
@@ -281,29 +202,22 @@
                 ],
                 autoWidth: false,
                 columnDefs: [{
-                        targets: [1, 6],
+                        targets: [3],
                         orderable: false
-                    } // gambar & aksi non-sort
+                    } // aksi non-sort
                 ]
             });
 
-            // global search
             $('#searchKeyword').on('keyup change', function() {
                 dt.search(this.value).draw();
             });
 
-            // filter rate (kolom index 2)
-            $('#filterRate').on('change', function() {
-                var val = this.value;
-                dt.column(2).search(val ? '^' + $.fn.dataTable.util.escapeRegex(val) + '$' : '', true, false).draw();
-            });
-
-            // sembunyikan kontrol fallback
+            // Hide fallback controls
             $('#fallbackRowsPerPage').hide();
             $('#fallbackPager').hide();
 
         } else {
-            // ===== Fallback mode =====
+            // Fallback mode (tanpa DataTables)
             var $rows = $table.find('tbody tr');
             var rowsPerPage = parseInt($('#fallbackRowsPerPage').val() || '10', 10);
             var currentPage = 1;
@@ -315,17 +229,10 @@
             function recomputeFiltered() {
                 filteredIdx = [];
                 var keyword = ($('#searchKeyword').val() || '').toLowerCase();
-                var rate = ($('#filterRate').val() || '').toLowerCase();
-
                 $rows.each(function(i) {
-                    var $tds = $(this).find('td');
                     var textAll = $(this).text().toLowerCase();
-                    var rateVal = ($tds.eq(2).text() || '').toLowerCase();
-
-                    var passKeyword = !keyword || textAll.indexOf(keyword) !== -1;
-                    var passRate = !rate || rateVal === rate;
-
-                    if (passKeyword && passRate) filteredIdx.push(i);
+                    var pass = !keyword || textAll.indexOf(keyword) !== -1;
+                    if (pass) filteredIdx.push(i);
                 });
             }
 
@@ -385,7 +292,7 @@
                 renderPage();
             }
 
-            $('#searchKeyword, #filterRate').on('keyup change', refilterAndReset);
+            $('#searchKeyword').on('keyup change', refilterAndReset);
             $('#fallbackRowsPerPage').on('change', function() {
                 rowsPerPage = parseInt(this.value, 10) || 10;
                 currentPage = 1;

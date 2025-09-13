@@ -3,78 +3,128 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Header extends CI_Controller
 {
+    private $table = 'tb_header';
+    private $pk    = 'header_id';
+    private $upload_path = 'assets/images/header/'; // ganti sesuai struktur proyekmu
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('general_model'); // Load model general_model
+        $this->load->database();
+        $this->load->model('General_model', 'gm');
+        $this->load->helper(['url', 'form', 'security']);
+        $this->load->library(['session', 'upload']);
+
+        if (!is_dir(FCPATH . $this->upload_path)) {
+            @mkdir(FCPATH . $this->upload_path, 0755, true);
+        }
     }
 
-    // Menampilkan semua data header
+    // LIST
     public function index()
     {
-        $data['headers'] = $this->general_model->get_all_headers(); // Ambil semua data header
-        $this->load->view('templates/header');
-        $this->load->view('header/index', $data);  // Menampilkan daftar header
+        $data['title'] = 'Header Management';
+        // Ambil semua header (DESC by id)
+        $data['headers'] = $this->gm->get_one_sort($this->table, [], $this->pk, 'DESC');
+        // Jika kamu pakai template layout, panggil di sini:
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('header/header', $data);
         $this->load->view('templates/footer');
     }
 
-    // Menampilkan form untuk menambahkan header
-    public function add()
-    {
-        $this->load->view('templates/header');
-        $this->load->view('header/add'); // Form untuk menambah header
-        $this->load->view('templates/footer');
-    }
-
-    // Proses menyimpan header
-    public function store()
-    {
-        $data = [
-            'slug' => $this->input->post('slug'),
-            'header_page' => $this->input->post('header_page'),
-            'header_logo' => $this->input->post('header_logo'), // Jika logo diupload, sesuaikan
-            'header_tittle' => $this->input->post('header_tittle'),
-            'header_description' => $this->input->post('header_description'),
-            'header_keywords' => $this->input->post('header_keywords')
-        ];
-
-        $this->general_model->insert_header($data); // Insert data header
-        redirect('header'); // Redirect ke halaman daftar header
-    }
-
-    // Menampilkan form untuk mengedit header
-    public function edit($id)
-    {
-        $data['header'] = $this->general_model->get_header_by_id($id); // Ambil data header berdasarkan ID
-        if (!$data['header']) {
-            show_404(); // Jika data tidak ditemukan, tampilkan halaman 404
-        }
-
-        $this->load->view('templates/header');
-        $this->load->view('header/edit', $data);  // Form untuk mengedit header
-        $this->load->view('templates/footer');
-    }
-
-    // Proses memperbarui data header
+    // LIST + buka modal edit untuk id tertentu
     public function update($id)
     {
-        $data = [
-            'slug' => $this->input->post('slug'),
-            'header_page' => $this->input->post('header_page'),
-            'header_logo' => $this->input->post('header_logo'), // Jika logo diupload, sesuaikan
-            'header_tittle' => $this->input->post('header_tittle'),
-            'header_description' => $this->input->post('header_description'),
-            'header_keywords' => $this->input->post('header_keywords')
-        ];
-
-        $this->general_model->update_header($id, $data); // Update data header
-        redirect('header'); // Kembali ke halaman daftar header setelah update
+        $data['title'] = 'Header Management';
+        $data['headers'] = $this->gm->get_one_sort($this->table, [], $this->pk, 'DESC');
+        $data['header_row'] = $this->gm->get_where_one($this->table, $this->pk, (int)$id);
+        if (!$data['header_row']) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('header');
+            return;
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('header/header', $data);
+        $this->load->view('templates/footer');
     }
 
-    // Hapus header
-    public function delete($id)
+    // PROSES UPDATE
+    public function update_header($id)
     {
-        $this->general_model->delete_header($id); // Hapus header berdasarkan ID
-        redirect('header'); // Kembali ke halaman daftar header setelah dihapus
+        if ($this->input->method() !== 'post') {
+            redirect('header');
+            return;
+        }
+
+        $row = $this->gm->get_where_one($this->table, $this->pk, (int)$id);
+        if (!$row) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('header');
+            return;
+        }
+
+        // Ambil input
+        $slug   = $this->security->xss_clean($this->input->post('slug', true));
+        $page   = $this->security->xss_clean($this->input->post('header_page', true));
+        $title  = $this->security->xss_clean($this->input->post('header_tittle', true));
+        $desc   = $this->security->xss_clean($this->input->post('header_description', true));
+        $keys   = $this->security->xss_clean($this->input->post('header_keywords', true));
+        $existing_logo = $this->security->xss_clean($this->input->post('existing_logo', true));
+
+        // Handle upload logo (opsional)
+        $logo_name = $existing_logo ?: 'logo.png';
+        if (!empty($_FILES['logo']['name'])) {
+            $up = $this->_do_upload('logo');
+            if ($up['status']) {
+                $logo_name = $up['file'];
+                // hapus file lama jika bukan default dan ada file-nya
+                if (
+                    !empty($existing_logo) && $existing_logo !== 'logo.png' &&
+                    file_exists(FCPATH . $this->upload_path . $existing_logo)
+                ) {
+                    @unlink(FCPATH . $this->upload_path . $existing_logo);
+                }
+            } else {
+                $this->session->set_flashdata('error', $up['error']);
+                redirect('header/update/' . $id);
+                return;
+            }
+        }
+
+        $update = [
+            'slug'               => $slug,
+            'header_page'        => $page,
+            'header_logo'        => $logo_name,
+            'header_tittle'      => $title,
+            'header_description' => $desc,
+            'header_keywords'    => $keys,
+        ];
+
+        if ($this->gm->update_where($this->table, $update, [$this->pk => (int)$id])) {
+            $this->session->set_flashdata('success', 'Header berhasil diperbarui.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui data.');
+        }
+        redirect('header');
+    }
+
+    // Helper upload
+    private function _do_upload($field)
+    {
+        $config = [
+            'upload_path'   => FCPATH . $this->upload_path,
+            'allowed_types' => 'gif|jpg|jpeg|png|webp',
+            'max_size'      => 2048, // KB
+            'encrypt_name'  => true,
+        ];
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload($field)) {
+            return ['status' => true, 'file' => $this->upload->data('file_name')];
+        }
+        return ['status' => false, 'error' => $this->upload->display_errors('', '')];
     }
 }

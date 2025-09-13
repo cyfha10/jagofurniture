@@ -1,110 +1,181 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Testimoni extends MX_Controller
+
+class Testimoni extends CI_Controller
 {
+    private $table = 'tb_testimoni';
+    private $pk    = 'testimoni_id';
+    private $upload_path = 'assets/images/testimoni/';
+
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('username')) {
-            // If not logged in, redirect to the login page
-            redirect('login');
+        $this->load->database();
+        $this->load->model('General_model', 'gm');
+        $this->load->helper(['url', 'form', 'security']);
+        $this->load->library(['session', 'upload']);
+
+        if (!is_dir(FCPATH . $this->upload_path)) {
+            @mkdir(FCPATH . $this->upload_path, 0755, true);
         }
-        $this->load->model('general_model'); // Load General_model
     }
 
-    private function _load_common_data()
-    {
-        // Ambil data kategori untuk ditampilkan
-        $data['testimonis'] = $this->general_model->get_all_testimoni(); // Ambil semua kategori
-        return $data;
-    }
-
-    // Display all testimonials
+    // ===== READ LIST =====
     public function index()
     {
-        $data = $this->_load_common_data();
-        $data['title'] = 'Manage Testimonials';
-        // Get all testimonis from the model
-
+        $data['title'] = 'Testimoni Management';
+        // Ambil semua testimoni (desc by id)
+        $data['testimonis'] = $this->gm->get_one_sort($this->table, [], $this->pk, 'DESC');
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('testimoni/testimoni', $data);  // Load the testimonial management view
+        $this->load->view('testimoni/testimoni', $data);
         $this->load->view('templates/footer');
     }
 
-    // Add new testimoni
-    public function add()
-    {
-        $data = [
-            'testimoni_images' => $this->upload_image(),
-            'testimoni_rate' => $this->input->post('rate'),
-            'testimoni_desc' => $this->input->post('desc'),
-            'testimoni_name' => $this->input->post('name'),
-            'testimoni_place' => $this->input->post('place')
-        ];
-
-        $this->general_model->insert_testimoni($data); // Insert testimoni into the database
-        redirect('testimoni');
-    }
-
-    // Update testimoni
-    public function update_testimoni()
-    {
-        $id = $this->input->post('testimoni_id');
-        $data = [
-            'testimoni_images' => $this->upload_image(),
-            'testimoni_rate' => $this->input->post('rate'),
-            'testimoni_desc' => $this->input->post('desc'),
-            'testimoni_name' => $this->input->post('name'),
-            'testimoni_place' => $this->input->post('place')
-        ];
-
-        $this->general_model->update_testimoni($id, $data); // Update testimoni in the database
-        redirect('testimoni');
-    }
-
-
+    // Buka list + modal edit untuk id tertentu
     public function update($id)
     {
-        // Mengambil data kategori untuk ditampilkan
-        $data['testimoni'] = $this->general_model->get_testimoni_by_id($id); // Ambil kategori berdasarkan ID
-
+        $data['title'] = 'Testimoni Management';
+        $data['testimonis'] = $this->gm->get_one_sort($this->table, [], $this->pk, 'DESC');
+        $data['testimoni']  = $this->gm->get_where_one($this->table, $this->pk, (int)$id);
         if (!$data['testimoni']) {
-            show_404(); // Jika tidak ada data kategori, tampilkan error 404
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('testimoni');
+            return;
         }
-
-        // Memuat view dan menampilkan data kategori yang sudah ada
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('testimoni/testimoni', $data);  // Mengirim data kategori ke view
+        $this->load->view('testimoni/testimoni', $data);
         $this->load->view('templates/footer');
     }
 
-    // Delete testimoni
-    public function delete($id)
+    // ===== CREATE =====
+    public function add()
     {
-        $this->general_model->delete_testimoni($id); // Delete the testimoni from the database
+        if ($this->input->method() !== 'post') {
+            redirect('testimoni');
+            return;
+        }
+
+        $rate  = $this->security->xss_clean($this->input->post('testimoni_rate', true));
+        $desc  = $this->security->xss_clean($this->input->post('testimoni_desc', true));
+        $name  = $this->security->xss_clean($this->input->post('testimoni_name', true));
+        $place = $this->security->xss_clean($this->input->post('testimoni_place', true));
+
+        // upload (opsional)
+        $image_name = '';
+        if (!empty($_FILES['image']['name'])) {
+            $up = $this->_do_upload('image');
+            if ($up['status']) $image_name = $up['file'];
+            else {
+                $this->session->set_flashdata('error', $up['error']);
+                redirect('testimoni');
+                return;
+            }
+        }
+
+        $insert = [
+            'testimoni_images' => $image_name,
+            'testimoni_rate'   => $rate,
+            'testimoni_desc'   => $desc,
+            'testimoni_name'   => $name,
+            'testimoni_place'  => $place,
+        ];
+
+        if ($this->gm->insert($this->table, $insert)) {
+            $this->session->set_flashdata('success', 'Testimoni berhasil ditambahkan.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menambah data.');
+        }
         redirect('testimoni');
     }
 
-    // Handle image upload
-    private function upload_image()
+    // ===== UPDATE =====
+    public function update_testimoni($id)
     {
-        $config['upload_path'] = './assets/images/testimoni/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = 1024; // 1 MB max
-        $config['file_name'] = uniqid();
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('image')) {
-            return $this->upload->data('file_name');
+        if ($this->input->method() !== 'post') {
+            redirect('testimoni');
+            return;
         }
 
-        return ''; // Return empty string if upload fails
+        $row = $this->gm->get_where_one($this->table, $this->pk, (int)$id);
+        if (!$row) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('testimoni');
+            return;
+        }
+
+        $rate  = $this->security->xss_clean($this->input->post('testimoni_rate', true));
+        $desc  = $this->security->xss_clean($this->input->post('testimoni_desc', true));
+        $name  = $this->security->xss_clean($this->input->post('testimoni_name', true));
+        $place = $this->security->xss_clean($this->input->post('testimoni_place', true));
+        $existing_image = $this->security->xss_clean($this->input->post('existing_image', true));
+
+        $image_name = $existing_image;
+
+        if (!empty($_FILES['image']['name'])) {
+            $up = $this->_do_upload('image');
+            if ($up['status']) {
+                $image_name = $up['file'];
+                // hapus lama
+                if (!empty($existing_image) && file_exists(FCPATH . $this->upload_path . $existing_image)) {
+                    @unlink(FCPATH . $this->upload_path . $existing_image);
+                }
+            } else {
+                $this->session->set_flashdata('error', $up['error']);
+                redirect('testimoni/update/' . $id);
+                return;
+            }
+        }
+
+        $update = [
+            'testimoni_images' => $image_name,
+            'testimoni_rate'   => $rate,
+            'testimoni_desc'   => $desc,
+            'testimoni_name'   => $name,
+            'testimoni_place'  => $place,
+        ];
+
+        // gunakan update_where dari General_model
+        if ($this->gm->update_where($this->table, $update, [$this->pk => (int)$id])) {
+            $this->session->set_flashdata('success', 'Testimoni berhasil diperbarui.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui data.');
+        }
+        redirect('testimoni');
+    }
+
+    // ===== DELETE =====
+    public function delete($id)
+    {
+        $row = $this->gm->get_where_one($this->table, $this->pk, (int)$id);
+        if ($row) {
+            if (!empty($row->testimoni_images) && file_exists(FCPATH . $this->upload_path . $row->testimoni_images)) {
+                @unlink(FCPATH . $this->upload_path . $row->testimoni_images);
+            }
+            $this->gm->delete($this->table, $this->pk, (int)$id);
+            $this->session->set_flashdata('success', 'Testimoni terhapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+        }
+        redirect('testimoni');
+    }
+
+    // ===== Helper Upload =====
+    private function _do_upload($field)
+    {
+        $config = [
+            'upload_path'   => FCPATH . $this->upload_path,
+            'allowed_types' => 'gif|jpg|jpeg|png|webp',
+            'max_size'      => 2048, // KB
+            'encrypt_name'  => true,
+        ];
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload($field)) {
+            return ['status' => true, 'file' => $this->upload->data('file_name')];
+        }
+        return ['status' => false, 'error' => $this->upload->display_errors('', '')];
     }
 }

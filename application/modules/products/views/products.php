@@ -23,21 +23,58 @@
                             <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
                         <?php endif; ?>
 
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex flex-wrap gap-2">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
                                 <i class="fa fa-plus"></i> Tambah Produk
                             </button>
                         </div>
 
+                        <!-- ========================= -->
+                        <!-- UI: Search + Filters -->
+                        <!-- ========================= -->
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-2">
+                                <input id="searchKeyword" type="text" class="form-control"
+                                    placeholder="Cari produk (teks bebas)..." autocomplete="off">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <select id="filterCategory" class="form-control">
+                                    <option value="">Semua Kategori</option>
+                                    <?php if (!empty($categories)): ?>
+                                        <?php foreach ($categories as $c): ?>
+                                            <option value="<?= htmlspecialchars($c['category_name']); ?>">
+                                                <?= htmlspecialchars($c['category_name']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-2 d-flex justify-content-between align-items-center">
+                                <select id="filterFavorite" class="form-control mr-2">
+                                    <option value="">Semua Status</option>
+                                    <option value="yes">Favorit</option>
+                                    <option value="no">Bukan Favorit</option>
+                                </select>
+                                <!-- Selector baris/halaman (fallback only) -->
+                                <select id="fallbackRowsPerPage" class="form-control" style="max-width:160px; display:none;">
+                                    <option value="5">5 / halaman</option>
+                                    <option value="10" selected>10 / halaman</option>
+                                    <option value="25">25 / halaman</option>
+                                    <option value="50">50 / halaman</option>
+                                    <option value="100">100 / halaman</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="adv-table">
-                            <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <table class="display table table-bordered table-striped" id="dynamic-table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th width="60">#</th>
                                         <th>Gambar</th>
                                         <th>Kategori</th>
                                         <th class="hidden-phone">Favorit</th>
-                                        <th class="hidden-phone" width="180">Aksi</th>
+                                        <th class="hidden-phone" width="220">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,6 +124,18 @@
                                     </tr>
                                 </tfoot>
                             </table>
+
+                            <!-- ===== Fallback pager (muncul hanya jika DataTables tidak ada) ===== -->
+                            <div id="fallbackPager" class="mt-3 d-flex align-items-center justify-content-between" style="display:none;">
+                                <div>
+                                    <button id="btnPrev" class="btn btn-sm btn-light mr-2">&laquo; Prev</button>
+                                    <span id="pageButtons"></span>
+                                    <button id="btnNext" class="btn btn-sm btn-light ml-2">Next &raquo;</button>
+                                </div>
+                                <div class="text-muted small">
+                                    <span id="rangeInfo">Menampilkan 0–0 dari 0</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -111,7 +160,7 @@
 
             <div class="modal-body">
 
-                <!-- Kategori (ID saja; nama akan diisi otomatis di controller) -->
+                <!-- Kategori -->
                 <div class="form-group">
                     <label for="add_category">Kategori</label>
                     <select name="category" id="add_category" class="form-control" required>
@@ -150,7 +199,7 @@
 </div>
 
 <!-- ========================= -->
-<!-- Modal: Edit Produk -->
+<!-- Modal: Edit Produk (opsional auto-open) -->
 <!-- ========================= -->
 <?php if (!empty($product)): ?>
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditTitle" aria-hidden="true">
@@ -165,7 +214,7 @@
 
                 <div class="modal-body">
 
-                    <!-- Kategori (ID saja; nama akan diisi otomatis di controller) -->
+                    <!-- Kategori -->
                     <div class="form-group">
                         <label for="edit_category">Kategori</label>
                         <select name="category" id="edit_category" class="form-control" required>
@@ -219,9 +268,149 @@
 <!-- ========================= -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Jika datang dari Products::update($id), buka modal edit otomatis
         <?php if (!empty($product)): ?>
             $('#modalEdit').modal('show');
         <?php endif; ?>
+
+        var $table = $('#dynamic-table');
+        var hasDataTables = (typeof $.fn !== 'undefined' && typeof $.fn.DataTable !== 'undefined');
+        var dt = null;
+
+        if (hasDataTables) {
+            // === DataTables mode (paging & search built-in) ===
+            dt = $table.DataTable({
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],
+                order: [
+                    [0, 'asc']
+                ],
+                autoWidth: false,
+                columnDefs: [{
+                    targets: [1, 4],
+                    orderable: false
+                }]
+            });
+
+            // Global search
+            $('#searchKeyword').on('keyup change', function() {
+                dt.search(this.value).draw();
+            });
+
+            // Filter kategori
+            $('#filterCategory').on('change', function() {
+                var val = this.value;
+                dt.column(2).search(val ? '^' + $.fn.dataTable.util.escapeRegex(val) + '$' : '', true, false).draw();
+            });
+
+            // Filter favorit
+            $('#filterFavorite').on('change', function() {
+                var val = this.value;
+                dt.column(3).search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+
+            // Sembunyikan kontrol fallback
+            $('#fallbackRowsPerPage').hide();
+            $('#fallbackPager').hide();
+
+        } else {
+            // ===== Fallback mode (tanpa DataTables) : paging sama seperti view sebelumnya =====
+            var $rows = $table.find('tbody tr');
+            var rowsPerPage = parseInt($('#fallbackRowsPerPage').val() || '10', 10);
+            var currentPage = 1;
+            var filtered = []; // array index baris yg lolos filter
+
+            $('#fallbackRowsPerPage').show();
+            $('#fallbackPager').show();
+
+            function recomputeFiltered() {
+                filtered = [];
+                var keyword = ($('#searchKeyword').val() || '').toLowerCase();
+                var cat = ($('#filterCategory').val() || '').toLowerCase();
+                var fav = ($('#filterFavorite').val() || '').toLowerCase();
+
+                $rows.each(function(i) {
+                    var $tds = $(this).find('td');
+                    var textAll = $(this).text().toLowerCase();
+                    var kategori = ($tds.eq(2).text() || '').toLowerCase();
+                    var favorit = ($tds.eq(3).text() || '').toLowerCase();
+
+                    var passKeyword = !keyword || textAll.indexOf(keyword) !== -1;
+                    var passCat = !cat || kategori === cat;
+                    var passFav = !fav || favorit.indexOf(fav) !== -1;
+
+                    if (passKeyword && passCat && passFav) filtered.push(i);
+                });
+            }
+
+            function renderPage() {
+                var total = filtered.length;
+                var totalPages = Math.max(1, Math.ceil(total / rowsPerPage));
+                if (currentPage > totalPages) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                // tampilkan hanya baris pada halaman aktif
+                $rows.hide();
+                var start = (currentPage - 1) * rowsPerPage;
+                var end = Math.min(start + rowsPerPage, total);
+                for (var k = start; k < end; k++) $rows.eq(filtered[k]).show();
+
+                // info range
+                var rangeStart = total === 0 ? 0 : (start + 1);
+                var rangeEnd = end;
+                $('#rangeInfo').text('Menampilkan ' + rangeStart + '–' + rangeEnd + ' dari ' + total);
+
+                // tombol pager (windowed 7)
+                var $pageButtons = $('#pageButtons').empty();
+                var windowSize = 7,
+                    half = Math.floor(windowSize / 2);
+                var startPage = Math.max(1, currentPage - half);
+                var endPage = Math.min(totalPages, startPage + windowSize - 1);
+                startPage = Math.max(1, endPage - windowSize + 1);
+
+                function makeBtn(label, page, active) {
+                    return $('<button class="btn btn-sm ' + (active ? 'btn-primary' : 'btn-light') + ' mr-1"></button>')
+                        .text(label)
+                        .on('click', function() {
+                            currentPage = page;
+                            renderPage();
+                        });
+                }
+
+                for (var p = startPage; p <= endPage; p++) {
+                    $pageButtons.append(makeBtn(p, p, p === currentPage));
+                }
+
+                // prev/next
+                $('#btnPrev').prop('disabled', currentPage <= 1).off('click').on('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderPage();
+                    }
+                });
+                $('#btnNext').prop('disabled', currentPage >= totalPages).off('click').on('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderPage();
+                    }
+                });
+            }
+
+            function refilterAndReset() {
+                currentPage = 1;
+                recomputeFiltered();
+                renderPage();
+            }
+
+            // events
+            $('#searchKeyword, #filterCategory, #filterFavorite').on('keyup change', refilterAndReset);
+            $('#fallbackRowsPerPage').on('change', function() {
+                rowsPerPage = parseInt(this.value, 10) || 10;
+                currentPage = 1;
+                renderPage();
+            });
+
+            // init
+            refilterAndReset();
+        }
     });
 </script>
