@@ -7,7 +7,7 @@
             <div class="col-sm-12">
                 <section class="card">
                     <header class="card-header d-flex justify-content-between align-items-center">
-                        <span>Dynamic Table</span>
+                        <span>Produk</span>
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:;" class="fa fa-times"></a>
@@ -25,7 +25,7 @@
 
                         <div class="mb-3 d-flex flex-wrap gap-2">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Tambah Produk
+                                <i class="fa fa-plus"></i> 
                             </button>
                         </div>
 
@@ -87,7 +87,7 @@
                                                     <?php if (!empty($p['product_images'])): ?>
                                                         <img src="<?= base_url('assets/images/product/' . $p['product_images']); ?>"
                                                             alt="img"
-                                                            style="height:48px;width:48px;object-fit:cover;border-radius:6px;">
+                                                            style="height:130px;width:130px;object-fit:cover;border-radius:6px;">
                                                     <?php else: ?>
                                                         <span class="text-muted">—</span>
                                                     <?php endif; ?>
@@ -102,27 +102,19 @@
                                                 </td>
                                                 <td class="center hidden-phone">
                                                     <a href="<?= site_url('products/update/' . $p['product_id']); ?>" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i>
                                                     </a>
                                                     <a href="<?= site_url('products/delete/' . $p['product_id']); ?>"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Hapus produk ini?');">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                        <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Gambar</th>
-                                        <th>Kategori</th>
-                                        <th class="hidden-phone">Favorit</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
 
                             <!-- ===== Fallback pager (muncul hanya jika DataTables tidak ada) ===== -->
@@ -255,8 +247,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>
