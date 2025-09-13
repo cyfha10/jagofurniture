@@ -25,7 +25,7 @@
 
                         <div class="mb-3 d-flex flex-wrap gap-2">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Tambah Testimoni
+                                <i class="fa fa-plus"></i>
                             </button>
                         </div>
 
@@ -61,7 +61,6 @@
                                     <tr>
                                         <th width="60">#</th>
                                         <th>Gambar</th>
-                                        <th>Rate</th>
                                         <th>Deskripsi</th>
                                         <th>Nama</th>
                                         <th>Tempat</th>
@@ -78,41 +77,30 @@
                                                     <?php if (!empty($t['testimoni_images'])): ?>
                                                         <img src="<?= base_url('assets/images/testimoni/' . $t['testimoni_images']); ?>"
                                                             alt="img"
-                                                            style="height:48px;width:48px;object-fit:cover;border-radius:6px;">
+                                                            style="height:120px;width:120px;object-fit:cover;border-radius:6px;">
                                                     <?php else: ?>
                                                         <span class="text-muted">—</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><?= htmlspecialchars($t['testimoni_rate']); ?></td>
                                                 <td><?= htmlspecialchars($t['testimoni_desc']); ?></td>
                                                 <td><?= htmlspecialchars($t['testimoni_name']); ?></td>
                                                 <td><?= htmlspecialchars($t['testimoni_place']); ?></td>
                                                 <td class="hidden-phone">
                                                     <a href="<?= site_url('testimoni/update/' . $t['testimoni_id']); ?>"
                                                         class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i> 
                                                     </a>
                                                     <a href="<?= site_url('testimoni/delete/' . $t['testimoni_id']); ?>"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Hapus testimoni ini?');">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                        <i class="fa fa-trash"></i> 
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Gambar</th>
-                                        <th>Rate</th>
-                                        <th>Deskripsi</th>
-                                        <th>Nama</th>
-                                        <th>Tempat</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
 
                             <!-- Fallback pager -->
