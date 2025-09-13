@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <aside>
     <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
@@ -9,29 +10,14 @@
                 </a>
             </li>
 
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-laptop"></i>
-                    <span>CRUD FORM</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="<?= base_url('banner'); ?>">BANNER</a></li>
-                    <li><a href="<?= base_url('blog'); ?>">BLOG</a></li>
-                    <li><a href="<?= base_url('category'); ?>">CATEGORY</a></li>
-                    <li><a href="<?= base_url('products'); ?>">PRODUCT</a></li>
-                    <li><a href="<?= base_url('testimoni'); ?>">TESTIMONI</a></li>
-                    <li><a href="<?= base_url('socialmedia'); ?>">SOCIAL MEDIA</a></li>
-                    <li><a href="<?= base_url('header'); ?>">HEADER</a></li>
-                    <li><a href="<?= base_url('aboutus'); ?>">ABOUT US</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="<?= base_url('login/logout'); ?>">
-                    <i class="fa fa-user"></i>
-                    <span>Login Page</span>
-                </a>
-            </li>
+            <li><a href="<?= base_url('banner'); ?>"><i class="fa fa-briefcase"></i> BANNER</a></li>
+            <li><a href="<?= base_url('blogs'); ?>"><i class="fa fa-tag"></i>BLOG</a></li>
+            <li><a href="<?= base_url('category'); ?>"><i class="fa fa-leaf"></i>CATEGORY</a></li>
+            <li><a href="<?= base_url('products'); ?>"><i class="fa fa-image"></i>PRODUCT</a></li>
+            <li><a href="<?= base_url('testimoni'); ?>"><i class="fa fa-file-text"></i>TESTIMONI</a></li>
+            <li><a href="<?= base_url('socialmedia'); ?>"><i class="fa fa-instagram"></i>SOCIAL MEDIA</a></li>
+            <li><a href="<?= base_url('header'); ?>"><i class="fa fa-envelope"></i>HEADER</a></li>
+            <li><a href="<?= base_url('aboutus'); ?>"><i class="fa fa-user-circle"></i>ABOUT US</a></li>
         </ul>
         <!-- sidebar menu end-->
     </div>
