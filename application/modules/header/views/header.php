@@ -60,7 +60,7 @@
                                                 <td><?= $no++; ?></td>
                                                 <td>
                                                     <?php $logo = !empty($h['header_logo']) ? $h['header_logo'] : 'logo.png'; ?>
-                                                    <img src="<?= base_url('assets/images/header/' . $logo); ?>" alt="logo" style="height:40px;width:40px;object-fit:cover;border-radius:6px;">
+                                                    <img src="<?= base_url('assets/images/' . $logo); ?>" alt="logo" style="height:40px;width:40px;object-fit:cover;border-radius:6px;">
                                                 </td>
                                                 <td><code><?= htmlspecialchars($h['slug']); ?></code></td>
                                                 <td><?= htmlspecialchars($h['header_page']); ?></td>
