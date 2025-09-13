@@ -154,7 +154,7 @@
                         <label for="edit_logo">Logo (opsional)</label>
                         <div class="d-flex align-items-center mb-2">
                             <?php if (!empty($header_row->header_logo)): ?>
-                                <img src="<?= base_url('assets/images/header/' . $header_row->header_logo); ?>" alt="current" style="height:48px;width:48px;object-fit:cover;border-radius:6px;margin-right:8px;">
+                                <img src="<?= base_url('assets/images/' . $header_row->header_logo); ?>" alt="current" style="height:48px;width:48px;object-fit:cover;border-radius:6px;margin-right:8px;">
                             <?php endif; ?>
                             <span class="text-muted small">Biarkan kosong jika tidak mengubah logo.</span>
                         </div>

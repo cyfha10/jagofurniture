@@ -5,7 +5,7 @@ class Header extends CI_Controller
 {
     private $table = 'tb_header';
     private $pk    = 'header_id';
-    private $upload_path = 'assets/images/header/'; // ganti sesuai struktur proyekmu
+    private $upload_path = 'assets/images/'; // ganti sesuai struktur proyekmu
 
     public function __construct()
     {
