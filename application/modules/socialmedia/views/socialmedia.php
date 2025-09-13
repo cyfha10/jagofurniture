@@ -24,7 +24,7 @@
 
                         <div class="mb-3">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Tambah
+                                <i class="fa fa-plus"></i>
                             </button>
                         </div>
 
@@ -69,26 +69,18 @@
                                                 </td>
                                                 <td class="hidden-phone">
                                                     <a href="<?= site_url('socialmedia/update/' . $r['socialmedia_id']); ?>" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i>
                                                     </a>
                                                     <a href="<?= site_url('socialmedia/delete/' . $r['socialmedia_id']); ?>"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Hapus data ini?');">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                        <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Link</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                </tbody>                                
                             </table>
 
                             <!-- Fallback pager -->
