@@ -15,7 +15,7 @@
 
                     <div class="card-body">
                         <form action="<?= site_url('about/update'); ?>" method="post" class="modal-content" enctype="multipart/form-data">
-                            <input type="hidden" name="about_id" id="edit_about_id">
+                            <input type="hidden" name="about_id" value="<?= htmlspecialchars($about_row->about_id); ?>">
 
                             <div class="form-group">
                                 <label for="edit_tittle"><strong>About Tittle</strong></label>
@@ -25,6 +25,22 @@
                             <div class="form-group">
                                 <label for="about_sub"><strong>About Sub</strong></label>
                                 <textarea name="about_sub" id="about_sub" class="form-control wysiwyg"><?= htmlspecialchars($about_row->about_sub); ?></textarea>
+                            </div>
+
+                            <!-- Image Upload Fields -->
+                            <div class="form-group">
+                                <label for="about_img_header"><strong>Image Header</strong></label>
+                                <input type="file" name="about_img_header" id="about_img_header" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="about_img_1"><strong>Image 1</strong></label>
+                                <input type="file" name="about_img_1" id="about_img_1" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="about_img_2"><strong>Image 2</strong></label>
+                                <input type="file" name="about_img_2" id="about_img_2" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -58,7 +74,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
                             </div>
                         </form>
                     </div>
@@ -67,7 +83,3 @@
         </div>
     </section>
 </section>
-
-
-</body>
-</html>

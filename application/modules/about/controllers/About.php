@@ -43,27 +43,83 @@ class About extends CI_Controller
     {
         // Check if form is submitted
         if ($this->input->post()) {
-            $data = array(
-                'about_tittle' => $this->input->post('about_tittle'),
-                'about_sub' => $this->input->post('about_sub'),
-                'about_img_header' => $this->input->post('about_img_header'),
-                'about_desc_1' => $this->input->post('about_desc_1'),
-                'about_desc_2' => $this->input->post('about_desc_2'),
-                'about_img_1' => $this->input->post('about_img_1'),
-                'about_desc_3' => $this->input->post('about_desc_3'),
-                'about_alamat' => $this->input->post('about_alamat'),
-                'about_whatsapp' => $this->input->post('about_whatsapp'),
-                'about_img_2' => $this->input->post('about_img_2'),
-                'about_desc_footer' => $this->input->post('about_desc_footer')
-            );
+            // Validate form fields here if necessary
+            $this->form_validation->set_rules('about_tittle', 'About Tittle', 'required');
+            $this->form_validation->set_rules('about_sub', 'About Sub', 'required');
+            $this->form_validation->set_rules('about_desc_1', 'Description 1', 'required');
+            // Add other validation rules here as needed
 
-            $about_id = $this->input->post('about_id');
-            $where = array('about_id' => $about_id);
-            $updated = $this->General_model->update('tb_about', $data, 'about_id', $about_id);
+            if ($this->form_validation->run() == FALSE) {
+                // If validation fails, reload the page with validation errors
+                $this->index();
+            } else {
+                // Handle image upload
+                $data = array(
+                    'about_tittle' => $this->input->post('about_tittle'),
+                    'about_sub' => $this->input->post('about_sub'),
+                    'about_desc_1' => $this->input->post('about_desc_1'),
+                    'about_desc_2' => $this->input->post('about_desc_2'),
+                    'about_desc_3' => $this->input->post('about_desc_3'),
+                    'about_alamat' => $this->input->post('about_alamat'),
+                    'about_whatsapp' => $this->input->post('about_whatsapp'),
+                    'about_desc_footer' => $this->input->post('about_desc_footer')
+                );
 
-            if ($updated) {
-                // Redirect to the About page or show a success message
-                redirect('about');
+                // Handle image uploads
+                if ($_FILES['about_img_header']['name']) {
+                    $config['upload_path'] = FCPATH . $this->upload_path;
+                    $config['allowed_types'] = 'jpg|png|jpeg|gif';
+                    $config['max_size'] = 2048; // 2MB
+
+                    $this->upload->initialize($config);
+
+                    if ($this->upload->do_upload('about_img_header')) {
+                        $upload_data = $this->upload->data();
+                        $data['about_img_header'] = $this->upload_path . $upload_data['file_name'];
+                    } else {
+                        // Handle image upload error
+                        $this->session->set_flashdata('error', $this->upload->display_errors());
+                    }
+                }
+
+                if ($_FILES['about_img_1']['name']) {
+                    $config['upload_path'] = FCPATH . $this->upload_path;
+                    $config['allowed_types'] = 'jpg|png|jpeg|gif';
+                    $config['max_size'] = 2048; // 2MB
+
+                    $this->upload->initialize($config);
+
+                    if ($this->upload->do_upload('about_img_1')) {
+                        $upload_data = $this->upload->data();
+                        $data['about_img_1'] = $this->upload_path . $upload_data['file_name'];
+                    }
+                }
+
+                if ($_FILES['about_img_2']['name']) {
+                    $config['upload_path'] = FCPATH . $this->upload_path;
+                    $config['allowed_types'] = 'jpg|png|jpeg|gif';
+                    $config['max_size'] = 2048; // 2MB
+
+                    $this->upload->initialize($config);
+
+                    if ($this->upload->do_upload('about_img_2')) {
+                        $upload_data = $this->upload->data();
+                        $data['about_img_2'] = $this->upload_path . $upload_data['file_name'];
+                    }
+                }
+
+                $about_id = $this->input->post('about_id');
+                $where = array('about_id' => $about_id);
+                $updated = $this->gm->update('tb_about', $data, 'about_id', $about_id);
+
+                if ($updated) {
+                    // Redirect to the About page or show a success message
+                    redirect('about');
+                } else {
+                    // Handle update failure
+                    $this->session->set_flashdata('error', 'Failed to update about information.');
+                    $this->index();
+                }
             }
         }
     }
