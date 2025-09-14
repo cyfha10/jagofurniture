@@ -10,6 +10,7 @@ class Dashboard extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('General_model', 'gm');
 
         // Check if user is logged in
         if (!$this->session->userdata('username')) {
@@ -21,6 +22,9 @@ class Dashboard extends MX_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
+        $data['count_product'] = $this->gm->count('tb_product');
+        $data['count_fav'] = $this->gm->count_where("tb_product", "product_favorite = 'yes'");
+        $data['count_blogs'] = $this->gm->count('tb_blog');
         // Load the header, dashboard, and footer views
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
