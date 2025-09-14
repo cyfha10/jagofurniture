@@ -75,7 +75,7 @@ class About extends CI_Controller
 
                     if ($this->upload->do_upload('about_img_header')) {
                         $upload_data = $this->upload->data();
-                        $data['about_img_header'] = $this->upload_path . $upload_data['file_name'];
+                        $data['about_img_header'] = $upload_data['file_name'];
                     } else {
                         // Handle image upload error
                         $this->session->set_flashdata('error', $this->upload->display_errors());
@@ -91,7 +91,7 @@ class About extends CI_Controller
 
                     if ($this->upload->do_upload('about_img_1')) {
                         $upload_data = $this->upload->data();
-                        $data['about_img_1'] = $this->upload_path . $upload_data['file_name'];
+                        $data['about_img_1'] = $upload_data['file_name'];
                     }
                 }
 
@@ -104,7 +104,7 @@ class About extends CI_Controller
 
                     if ($this->upload->do_upload('about_img_2')) {
                         $upload_data = $this->upload->data();
-                        $data['about_img_2'] = $this->upload_path . $upload_data['file_name'];
+                        $data['about_img_2'] = $upload_data['file_name'];
                     }
                 }
 

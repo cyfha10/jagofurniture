@@ -30,16 +30,34 @@
                             <!-- Image Upload Fields -->
                             <div class="form-group">
                                 <label for="about_img_header"><strong>Image Header</strong></label>
+                                <div class="d-flex align-items-center mb-2">
+				                            <?php if (!empty($about_row->about_img_header)): ?>
+				                                <img src="<?= base_url('assets/images/' . $about_row->about_img_header); ?>" alt="current" style="height:120px;width:250px;object-fit:cover;border-radius:6px;margin-right:8px;">
+				                            <?php endif; ?>
+				                            <span class="text-muted small">Biarkan kosong jika tidak mengubah logo.</span>
+				                        </div>
                                 <input type="file" name="about_img_header" id="about_img_header" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label for="about_img_1"><strong>Image 1</strong></label>
+                                <div class="d-flex align-items-center mb-2">
+				                            <?php if (!empty($about_row->about_img_1)): ?>
+				                                <img src="<?= base_url('assets/images/' . $about_row->about_img_1); ?>" alt="current" style="height:120px;width:250px;object-fit:cover;border-radius:6px;margin-right:8px;">
+				                            <?php endif; ?>
+				                            <span class="text-muted small">Biarkan kosong jika tidak mengubah logo.</span>
+				                        </div>
                                 <input type="file" name="about_img_1" id="about_img_1" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label for="about_img_2"><strong>Image 2</strong></label>
+                                <div class="d-flex align-items-center mb-2">
+				                            <?php if (!empty($about_row->about_img_2)): ?>
+				                                <img src="<?= base_url('assets/images/' . $about_row->about_img_2); ?>" alt="current" style="height:120px;width:250px;object-fit:cover;border-radius:6px;margin-right:8px;">
+				                            <?php endif; ?>
+				                            <span class="text-muted small">Biarkan kosong jika tidak mengubah logo.</span>
+				                        </div>
                                 <input type="file" name="about_img_2" id="about_img_2" class="form-control">
                             </div>
 
