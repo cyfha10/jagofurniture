@@ -24,7 +24,7 @@
 
                         <div class="mb-3">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Tambah Banner
+                                <i class="fa fa-plus"></i> 
                             </button>
                         </div>
 
@@ -69,7 +69,7 @@
                                                 <td class="text-truncate" style="max-width:260px;"><?= htmlspecialchars($r['banner_sub']); ?></td>
                                                 <td>
                                                     <?php if (!empty($r['banner_images'])): ?>
-                                                        <img src="<?= base_url($r['banner_images']); ?>" alt="img" style="max-width:100px;height:auto;">
+                                                        <img src="<?= base_url('assets/images/' . $r['banner_images']); ?>" alt="img" style="max-width:100px;height:auto;">
                                                     <?php else: ?>
                                                         <em>-</em>
                                                     <?php endif; ?>
@@ -83,30 +83,18 @@
                                                 <td><?= htmlspecialchars($r['banner_category']); ?></td>
                                                 <td class="hidden-phone">
                                                     <a href="<?= site_url('banner/update/' . $r['banner_id']); ?>" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i> 
                                                     </a>
                                                     <a href="<?= site_url('banner/delete/' . $r['banner_id']); ?>"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Hapus banner ini?');">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                        <i class="fa fa-trash"></i> 
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
-                                        <th>Sub</th>
-                                        <th>Image</th>
-                                        <th>Button</th>
-                                        <th>Link</th>
-                                        <th>Category</th>
-                                        <th class="hidden-phone">Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
 
                             <!-- Fallback pager -->
@@ -209,7 +197,7 @@
                     <div class="form-group">
                         <label>Current Image</label><br>
                         <?php if (!empty($row->banner_images)): ?>
-                            <img src="<?= base_url($row->banner_images); ?>" alt="img" style="max-width:120px;height:auto;">
+                            <img src="<?= base_url('assets/images/' . $row->banner_images); ?>" alt="img" style="max-width:120px;height:auto;">
                         <?php else: ?>
                             <em>-</em>
                         <?php endif; ?>
@@ -239,8 +227,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>

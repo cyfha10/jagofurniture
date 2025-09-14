@@ -129,8 +129,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
             </div>
         </form>
     </div>
@@ -166,8 +165,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>

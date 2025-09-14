@@ -22,7 +22,7 @@
                         <div class="mb-3">
                             <!-- Tombol Add -->
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
-                                <i class="fa fa-plus"></i> Add New Blog
+                                <i class="fa fa-plus"></i> 
                             </button>
                         </div>
 
@@ -31,7 +31,6 @@
                             <div class="col-md-6 mb-2">
                                 <form method="get" action="<?= site_url('blogs/index'); ?>">
                                     <input id="searchKeyword" type="text" name="search" class="form-control" placeholder="Search blog..." autocomplete="off" value="<?= isset($search_term) ? $search_term : ''; ?>">
-                                    <button type="submit" class="btn btn-secondary mt-2">Search</button>
                                 </form>
                             </div>
                         </div>
@@ -67,11 +66,11 @@
                                                         data-header="<?= htmlspecialchars($blog['blog_img_header']) ?>"
                                                         data-short="<?= htmlspecialchars($blog['blog_short']) ?>"
                                                         data-desc="<?= htmlspecialchars($blog['blog_desc']) ?>">
-                                                        <i class="fa fa-pencil"></i> Edit
+                                                        <i class="fa fa-pencil"></i>
                                                     </button>
                                                     <a href="<?= site_url('blogs/delete/' . $blog['blog_id']); ?>" class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Delete this blog?');">
-                                                        <i class="fa fa-trash"></i> Delete
+                                                        <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -147,8 +146,7 @@
                 <div id="addMsg" class="small text-danger d-none"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
             </div>
         </form>
     </div>

@@ -63,7 +63,7 @@
                                         <th>Gambar</th>
                                         <th>Deskripsi</th>
                                         <th>Nama</th>
-                                        <th>Tempat</th>
+                                        <th>Tempat Usaha</th>
                                         <th width="200" class="hidden-phone">Aksi</th>
                                     </tr>
                                 </thead>
@@ -160,7 +160,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="add_place">Tempat</label>
+                    <label for="add_place">Tempat Usaha</label>
                     <input type="text" name="testimoni_place" id="add_place" class="form-control" required>
                 </div>
 
@@ -172,8 +172,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
             </div>
         </form>
     </div>
@@ -216,7 +215,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="edit_place">Tempat</label>
+                        <label for="edit_place">Tempat Usaha</label>
                         <input type="text" name="testimoni_place" id="edit_place" class="form-control"
                             value="<?= htmlspecialchars($testimoni->testimoni_place); ?>" required>
                     </div>
@@ -237,8 +236,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>
