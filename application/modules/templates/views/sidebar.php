@@ -4,6 +4,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             
+            <li><a href="<?= base_url('admin'); ?>"><i class="fa fa-diamond"></i>ADMIN</a></li>
             <li><a href="<?= base_url('header'); ?>"><i class="fa fa-envelope"></i>HEADER</a></li>
             <li><a href="<?= base_url('about'); ?>"><i class="fa fa-user-circle"></i>ABOUT US</a></li>
             <li><a href="<?= base_url('banner'); ?>"><i class="fa fa-briefcase"></i> BANNER</a></li>
