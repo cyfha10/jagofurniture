@@ -11,7 +11,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="<?= base_url('assets/admin/'); ?>img/favicon.html">
 
-    <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
+    <title>Halaman Login Administrator - Jagofurniture</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/admin/'); ?>css/bootstrap.min.css" rel="stylesheet">

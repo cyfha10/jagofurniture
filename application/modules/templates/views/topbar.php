@@ -13,7 +13,7 @@
                 <ul class="nav pull-right top-menu">
                     <!-- user login dropdown start-->
                     <li><a href="<?= base_url(); ?>" target="_blank"><i class="fa fa-eye"></i> &nbsp;Preview</a></li>
-                    <li><a href="<?= base_url('login/logout'); ?>"><i class="fa fa-power-off"></i> &nbsp;LOGOUT</a></li>
+                    <li><a href="<?= base_url('login/logout'); ?>"><i class="fa fa-power-off"></i> &nbsp;Logout</a></li>
                 </ul>
                 <!--search & user info end-->
             </div>
