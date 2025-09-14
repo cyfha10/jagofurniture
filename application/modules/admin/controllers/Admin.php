@@ -37,25 +37,6 @@ class Admin extends MX_Controller
         $this->load->view('templates/footer');
     }
 
-    // Tampilkan halaman index + modal edit terbuka untuk ID tertentu
-    public function update($id)
-    {
-        $data = $this->_load_common_data();
-
-        $data['admin'] = $this->general_model->get_where_one($this->tableAdmin, $this->pk, $id);
-        if (!$data['admin']) {
-            show_404();
-        }
-
-        $data['title'] = 'Category Management';
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('admin/admin', $data);
-        $this->load->view('templates/footer');
-    }
-
     // Create
     public function add()
     {
@@ -81,37 +62,11 @@ class Admin extends MX_Controller
         redirect('admin');
     }
 
-    // Update (proses submit)
-    public function update_admin($id)
-    {
-        $name = $this->input->post('admin_name', true);
-        $slug = $this->input->post('admin_slug', true);
-
-        if (!$name) {
-            $this->session->set_flashdata('error', 'Nama kategori wajib diisi.');
-            return redirect('admin/update/' . $id);
-        }
-
-        if (!$slug) {
-            $slug = url_title($name, '-', true);
-        }
-
-        $data = [
-            'admin_name' => $name,
-            'admin_slug' => $slug,
-        ];
-
-        // General_model->update($table, $data, $whereField, $id)
-        $this->general_model->update($this->tableAdmin, $data, $this->pk, $id);
-        $this->session->set_flashdata('success', 'Kategori berhasil diperbarui.');
-        redirect('admin');
-    }
-
     // Delete
     public function delete($id)
     {
         $this->general_model->delete($this->tableAdmin, $this->pk, $id);
-        $this->session->set_flashdata('success', 'Kategori berhasil dihapus.');
+        $this->session->set_flashdata('success', 'Data Admin berhasil dihapus.');
         redirect('admin');
     }
 }
