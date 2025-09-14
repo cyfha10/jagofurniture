@@ -17,7 +17,7 @@
             <li><a href="<?= base_url('testimoni'); ?>"><i class="fa fa-file-text"></i>TESTIMONI</a></li>
             <li><a href="<?= base_url('socialmedia'); ?>"><i class="fa fa-instagram"></i>SOCIAL MEDIA</a></li>
             <li><a href="<?= base_url('header'); ?>"><i class="fa fa-envelope"></i>HEADER</a></li>
-            <li><a href="<?= base_url('aboutus'); ?>"><i class="fa fa-user-circle"></i>ABOUT US</a></li>
+            <li><a href="<?= base_url('about'); ?>"><i class="fa fa-user-circle"></i>ABOUT US</a></li>
         </ul>
         <!-- sidebar menu end-->
     </div>

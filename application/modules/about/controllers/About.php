@@ -3,23 +3,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class About extends CI_Controller
 {
+    private $table = 'tb_about';
+    private $pk    = 'about_id';
+    private $upload_path = 'assets/images/'; // ganti sesuai struktur proyekmu
+
     public function __construct()
     {
         parent::__construct();
+        $this->load->database();
+        $this->load->model('General_model', 'gm');
+        $this->load->helper(['url', 'form', 'security']);
+        $this->load->library(['session', 'upload']);
         if (!$this->session->userdata('username')) {
             // If not logged in, redirect to the login page
             redirect('login');
         }
-        // Load the General_model
-        $this->load->model('General_model');
+
+        if (!is_dir(FCPATH . $this->upload_path)) {
+            @mkdir(FCPATH . $this->upload_path, 0755, true);
+        }
     }
 
     // View About data
     public function index()
     {
         // Get the first (or only) record of the 'tb_about' table
-        $data['about'] = $this->General_model->get('tb_about');
+        $data['about'] = $this->gm->get('tb_about');
         $data['title'] = 'About Management';
+        $data['about_row'] = $this->gm->get_where_one($this->table, $this->pk, (int)1);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
